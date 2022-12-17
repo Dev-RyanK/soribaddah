@@ -21,10 +21,6 @@ const StWrapper = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  div {
-    border: 1px solid #000;
-    /* padding: 1rem; */
-  }
 `
 
 const StDetailContent = styled.div`
@@ -33,5 +29,8 @@ const StDetailContent = styled.div`
   align-items: center;
   flex-direction: column;
   width: 600px;
-  border: 4px solid teal;
+  border: 4px solid var(--color-midblue);
+  border-radius: 1rem;
+  box-shadow: 12px 12px 2px 1px var(--color-lightblue);
+  padding: 50px;
 `
