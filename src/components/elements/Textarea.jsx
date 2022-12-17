@@ -1,8 +1,14 @@
 import React from "react"
 import styled from "styled-components"
 
-const Textarea = ({ hidden }) => {
-  return <textarea hidden={hidden} />
+const Textarea = (props) => {
+  const { hidden, children, width, margin, padding } = props
+  const styles = { width: width, margin: margin, padding: padding }
+  return <textarea {...styles} hidden={hidden} />
+}
+
+Textarea.defaultProps = {
+  hidden: false,
 }
 
 export default Textarea

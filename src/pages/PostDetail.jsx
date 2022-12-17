@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from "react"
-import Button from "../components/elements/Button"
+import { useDispatch } from "react-redux"
 import styled from "styled-components"
-import PostHeader from "../components/PostDetails/PostHeader"
 import PostBody from "../components/PostDetails/PostBody"
-import PostReplies from "../components/PostDetails/PostReplies"
-
-// export const DB = process.env.React_APP_DBSERVER
+import PostComment from "../components/PostDetails/PostComment"
 
 const PostDetail = () => {
-  useEffect(() => {}, [])
   return (
     <StWrapper>
       <StDetailContent>
-        <PostHeader />
         <PostBody />
-        <PostReplies />
+        <PostComment />
       </StDetailContent>
     </StWrapper>
   )
