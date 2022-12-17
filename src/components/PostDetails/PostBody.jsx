@@ -5,6 +5,7 @@ import styled from "styled-components"
 import { getPost, __getPost } from "../../redux/modules/postDetailSlice"
 import { instance, postGetInstance } from "../../shared/instance"
 import Button from "../../components/elements/Button"
+import classes from "./PostBody.module.css"
 
 const PostBody = () => {
   const { post, isLoading, error } = useSelector((state) => state.post)
@@ -46,7 +47,8 @@ const PostBody = () => {
 
   return (
     <>
-      <StHeader>
+      <StHeader className={classes.titleBox}>
+        &nbsp;
         <div>
           <h2>{detailContent?.title}</h2>
           <br />
@@ -71,22 +73,17 @@ const PostBody = () => {
 export default PostBody
 
 const StHeader = styled.div`
-  // 그리드로 타이틀 중앙 맞추기!!
-  display: flex;
-  justify-content: center;
-  align-items: center;
   width: 100%;
-  h2,
-  h3 {
-    margin-block: 0;
-  }
   div {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: center;
     margin-right: 0 auto;
     margin-left: auto;
     text-align: center;
   }
+  grid-area: title;
 `
 
 const StDetailBody = styled.div`
@@ -97,5 +94,8 @@ const StDetailBody = styled.div`
   width: 100%;
   img {
     width: 100%;
+  }
+  p {
+    margin: 40px 0px 40px;
   }
 `
