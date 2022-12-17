@@ -1,21 +1,47 @@
 import React from "react"
 import styled from "styled-components"
 
-const Button = ({ type, className, hidden, onClick, children }) => {
+const Button = (props) => {
+  const {
+    type,
+    className,
+    hidden,
+    onClick,
+    text,
+    width,
+    margin,
+    padding,
+    children,
+  } = props
+
+  const styles = { margin: margin, width: width, padding: padding }
+
   return (
-    <ElButton
-      type={type}
-      className={className}
-      hidden={hidden}
-      onClick={onClick}
-    >
-      {children}
-    </ElButton>
+    <>
+      <ElButton
+        {...styles}
+        type={type}
+        className={className}
+        hidden={hidden}
+        onClick={onClick}
+      >
+        {text ? text : children}
+      </ElButton>
+    </>
   )
 }
 
-Button.defaultProps = () => {
-  return <button>임시버튼</button>
+Button.defaultProps = {
+  type: "button",
+  className: "",
+  hidden: false,
+  onClick: () => {},
+  // onClick: null,
+  text: false,
+  width: "100%",
+  margin: false,
+  padding: "10px",
+  children: null,
 }
 
 export default Button
