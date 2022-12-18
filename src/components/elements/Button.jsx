@@ -39,7 +39,7 @@ Button.defaultProps = {
   // onClick: null,
   text: false,
   width: "100%",
-  margin: false,
+  margin: "",
   padding: "10px",
   children: null,
 }
