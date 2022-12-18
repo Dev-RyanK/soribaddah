@@ -97,7 +97,7 @@ const StTitle = styled.div`
 const ElBtnBox = styled.div`
   display: grid;
   align-content: center;
-  margin-right: 0 auto;
+  /* margin-right: 0 auto; */
   margin-left: auto;
   grid-area: btnBox;
 `
