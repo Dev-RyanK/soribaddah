@@ -1,6 +1,7 @@
 import axios from "axios"
 
 // "http://localhost:3003"
+// 129.154.54.69:8080
 export const DB = process.env.React_APP_DBSERVER
 
 export const instance = axios.create({
@@ -14,13 +15,13 @@ export const instance = axios.create({
 
 // 회원가입 폼 보내기
 export const postSignupInstance = axios.create({
-  baseURL: "http://192.168.4.212:8080/api",
+  baseURL: `${DB}/api`,
   headers: { "Access-Control-Allow-Origin": "*" },
 })
 
 // 로그인 하기
 export const loginInstance = axios.create({
-  baseURL: "http://192.168.4.212:8080/api",
+  baseURL: `${DB}/api`,
   headers: {
     "Access-Control-Allow-Origin": "*",
     "content-type": "application/json; charset=UTF-8",
@@ -30,12 +31,12 @@ export const loginInstance = axios.create({
 
 // 전체 음악 API
 export const postGetInstance = axios.create({
-  baseURL: `${DB}/music`,
+  baseURL: `${DB}/api/music`,
 })
 
 // 댓글 API
 export const commentGetInstance = axios.create({
-  baseURL: `${DB}/comment`,
+  baseURL: `${DB}/api/comment`,
 })
 
 // 인터셉터용
