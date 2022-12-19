@@ -1,5 +1,4 @@
 import axios from "axios"
-import { useParams } from "react-router-dom"
 
 // "http://localhost:3003"
 export const DB = process.env.React_APP_DBSERVER
@@ -13,20 +12,23 @@ export const instance = axios.create({
   },
 })
 
+// 회원가입 폼 보내기
 export const postSignupInstance = axios.create({
   baseURL: "http://192.168.4.212:8080/api",
   headers: { "Access-Control-Allow-Origin": "*" },
 })
 
-// query string 식으로는 안 돌아감
+// 전체 음악 API
 export const postGetInstance = axios.create({
   baseURL: `${DB}/music`,
 })
 
+// 댓글 API
 export const commentGetInstance = axios.create({
   baseURL: `${DB}/comment`,
 })
 
+// 인터셉터용
 export const baseURL = axios.create({
   baseURL: DB,
   headers: {
@@ -43,6 +45,7 @@ baseURL.interceptors.request.use((config) => {
 
 // 임시 GET
 // 이렇게는 쓸 수 없다!
+// query string 식으로는 안 돌아감
 // export const postGetInstance = instance.get(`/music?musicId=`, param())
 
 // export default instance

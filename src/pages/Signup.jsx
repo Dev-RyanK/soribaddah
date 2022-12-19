@@ -2,7 +2,6 @@ import React, { useState } from "react"
 import styled from "styled-components"
 import Input from "../components/elements/Input"
 import Button from "../components/elements/Button"
-import axios from "axios"
 import { useDispatch, useSelector } from "react-redux"
 import { __postSignup } from "../redux/modules/signupSlice"
 
