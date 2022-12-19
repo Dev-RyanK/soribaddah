@@ -12,6 +12,7 @@ const Input = (props) => {
     size,
     pattern,
     title,
+    defaultValue,
     required,
     onChange,
     width,
@@ -30,6 +31,7 @@ const Input = (props) => {
       value={value}
       placeholder={placeholder}
       size={size}
+      defaultValue={defaultValue}
       pattern={pattern}
       title={title}
       onChange={onChange}
@@ -48,6 +50,7 @@ Input.defaultProps = {
   size: "",
   pattern: null,
   title: null,
+  defaultValue: "",
   children: null,
   width: "100%",
   margin: "",
