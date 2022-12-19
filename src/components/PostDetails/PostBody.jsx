@@ -10,6 +10,7 @@ import PostComment from "./PostComment"
 import Button from "../elements/Button"
 import Input from "../elements/Input"
 import Textarea from "../elements/Textarea"
+import { DB } from "../../shared/instance"
 
 const PostBody = () => {
   const { post, isLoading, error } = useSelector((state) => state.post)
@@ -36,7 +37,7 @@ const PostBody = () => {
     // dispatch(__getPost(paramId))
     // setDetailContent(post)
     try {
-      const data = await postGetInstance.get(`?musicId=${paramId}`)
+      const data = await postGetInstance.get(`/${paramId}`)
       setDetailContent(...data.data)
     } catch (error) {
       console.log(error)
@@ -129,7 +130,7 @@ export default PostBody
 
 const StDetailWrapper = styled.div`
   display: grid;
-  height: 800px;
+  height: 1000px;
   grid-template-columns: 10% 1fr 10%;
   grid-template-rows: 50px 40px 1fr 40px 1fr 1fr;
   grid-template-areas:
@@ -138,7 +139,7 @@ const StDetailWrapper = styled.div`
     ". albumCover ."
     ". . ."
     ". review ."
-    ". comments .";
+    "comments comments comments";
 `
 
 const StFormWrapper = styled.div`
