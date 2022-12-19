@@ -27,8 +27,8 @@ const Signup = () => {
       case info.nickname.trim():
         return alert("닉네임을 적어주세요")
       default:
-        return await dispatch(__postSignup({ ...info }))
-      // console.log(info)
+        // return await dispatch(__postSignup({ ...info }))
+        console.log(info)
     }
   }
 
@@ -49,7 +49,7 @@ const Signup = () => {
           name="loginId"
           minLength="4"
           maxLength="10"
-          pattern="(?=.*[a-z])(?=.*[0-9]).{4,10}"
+          pattern="^[a-z0-9]{4,10}$"
           title="영어 소문자 및 숫자"
           onChange={addInfo}
         />
@@ -67,10 +67,12 @@ const Signup = () => {
           minLength="8"
           maxLength="15"
           name="password"
-          // pattern="^(?=.*[A-Za-z])(?=.*\d)(?=.*[$@$!%*#?&])[A-Za-z\d$@$!%*#?&]$"
-          /* pattern="(?=.*[a-zA-z])(?=.*[0-9])"
-          title="영어 대소문자, 숫자, 특수문자" */
-          onChange={addInfo}
+          pattern="(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$"
+          title="영어 대소문자, 숫자, 특수문자"
+          onChange={(e) => {
+            addInfo(e)
+            console.log(e.target.value)
+          }}
         />
         <Button type="submit">회원 가입</Button>
       </ElForm>
