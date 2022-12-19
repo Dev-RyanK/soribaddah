@@ -4,15 +4,7 @@ import Input from "../components/elements/Input"
 import Button from "../components/elements/Button"
 
 const Signup = () => {
-  const [inputId, setInputId] = useState("")
-  const [inputNickname, setInputNickname] = useState("")
-  const [inputPassword, setInputPassword] = useState("")
-  // 객체로 쓸 경우
-  const [info, setInfo] = useState({
-    userId: "",
-    userPassword: "",
-    nickname: "",
-  })
+  const [info, setInfo] = useState({})
 
   const addInfo = (e) => {
     const { name, value } = e.target
@@ -21,12 +13,19 @@ const Signup = () => {
 
   return (
     <StSignupForm>
-      {/* 작업 중 */}
       <ElForm
         onSubmit={(e) => {
           e.preventDefault()
-          setInfo({ info })
-          console.log(info)
+          switch ("") {
+            case info.userId.trim():
+              return alert("아이디를 적어주세요")
+            case info.userPassword.trim():
+              return alert("비밀번호를 적어주세요")
+            case info.nickname.trim():
+              return alert("닉네임을 적어주세요")
+            default:
+              return
+          }
         }}
       >
         <h3>회원가입</h3>
@@ -34,7 +33,8 @@ const Signup = () => {
           required
           placeholder="아이디"
           type="text"
-          name="{userId}"
+          name="userId"
+          maxLength="8"
           onChange={addInfo}
         />
         <Input
@@ -42,12 +42,14 @@ const Signup = () => {
           placeholder="닉네임"
           type="text"
           name="nickname"
+          maxLength="8"
           onChange={addInfo}
         />
         <Input
           required
           placeholder="비밀번호"
           type="password"
+          maxLength="8"
           name="userPassword"
           onChange={addInfo}
         />
