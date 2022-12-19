@@ -18,6 +18,16 @@ export const postSignupInstance = axios.create({
   headers: { "Access-Control-Allow-Origin": "*" },
 })
 
+// 로그인 하기
+export const loginInstance = axios.create({
+  baseURL: "http://192.168.4.212:8080/api",
+  headers: {
+    "Access-Control-Allow-Origin": "*",
+    "content-type": "application/json; charset=UTF-8",
+    Authorization: `Bearer asdfasdf`,
+  },
+})
+
 // 전체 음악 API
 export const postGetInstance = axios.create({
   baseURL: `${DB}/music`,
