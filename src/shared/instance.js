@@ -13,6 +13,11 @@ export const instance = axios.create({
   },
 })
 
+export const postSignupInstance = axios.create({
+  baseURL: "http://192.168.4.212:8080/api",
+  headers: { "Access-Control-Allow-Origin": "*" },
+})
+
 // query string 식으로는 안 돌아감
 export const postGetInstance = axios.create({
   baseURL: `${DB}/music`,
