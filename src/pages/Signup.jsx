@@ -27,8 +27,7 @@ const Signup = () => {
       case info.nickname.trim():
         return alert("닉네임을 적어주세요")
       default:
-        // return await dispatch(__postSignup({ ...info }))
-        console.log(info)
+        return await dispatch(__postSignup({ ...info }))
     }
   }
 
@@ -69,10 +68,7 @@ const Signup = () => {
           name="password"
           pattern="(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$"
           title="영어 대소문자, 숫자, 특수문자"
-          onChange={(e) => {
-            addInfo(e)
-            console.log(e.target.value)
-          }}
+          onChange={addInfo}
         />
         <Button type="submit">회원 가입</Button>
       </ElForm>
