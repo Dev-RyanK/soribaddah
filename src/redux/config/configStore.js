@@ -1,9 +1,8 @@
-import { configureStore } from "@reduxjs/toolkit";
-import post from "../modules/postDetailSlice";
-import music from "../modules/todoSlice";
+import { configureStore } from "@reduxjs/toolkit"
+import post from "../modules/postDetailSlice"
 
 const store = configureStore({
-  reducer: { post: post, music: music },
-});
+  reducer: { post: post },
+})
 
-export default store;
+export default store

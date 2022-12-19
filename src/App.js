@@ -1,6 +1,6 @@
-import React from "react";
-import GlobalStyle from "./shared/GlobalStyles";
-import Router from "./shared/Router";
+import React from "react"
+import GlobalStyle from "./shared/GlobalStyles"
+import Router from "./shared/Router"
 
 const App = () => {
   return (
@@ -8,7 +8,7 @@ const App = () => {
       <GlobalStyle />
       <Router />
     </>
-  );
-};
+  )
+}
 
-export default App;
+export default App
