@@ -1,0 +1,118 @@
+{
+  "music": [
+    {
+      "musicId": 0,
+      "title": "FROM DB**NEXT EPISODE",
+      "artist": "AKMU",
+      "nickname": "Ryan",
+      "contents": "이번 앨범 [NEXT EPISODE]를 엮어낸 주제는 ‘Beyond Freedom(초월자유)’이다. ‘초월자유’란 단순히 육체적인 안락과 편안함을 넘어 어떠한 환경이나 상태에도 영향받지 않는 내면의 자유를 의미하며, AKMU는 이 주제를 트랙리스트 7곡에서 각기 다른 이야기로 풀어내었다.",
+      "image": "https://cdnimg.melon.co.kr/cm2/album/images/106/61/658/10661658_20210726111159_500.jpg?a937828fb23cb2663ea6063523e14fc3",
+      "createdAt": "2022-12-15T21:05:41.160353",
+      "modifiedAt": "2022-12-15T21:05:41.160353",
+      "commentList": []
+    },
+    {
+      "musicId": 1,
+      "title": "Undercurrent",
+      "artist": "Bill Evans/Jim Hall",
+      "nickname": "Ryan",
+      "contents": "Undercurrent is a 1962 album by jazz pianist Bill Evans and jazz guitarist Jim Hall. They would collaborate again in 1966 for the follow-up album Intermodulation. In his November 26, 1962 review for Down Beat magazine jazz critic Pete Welding states: 'This collaboration between Evans and Hall has resulted in some of the most beautiful, thoroughly ingratiating music it has been my pleasure to hear...'",
+      "image": "http://image.yes24.com/momo/TopCate0010/hani/L_331737.jpg",
+      "createdAt": "2022-12-15T21:05:41.160353",
+      "modifiedAt": "2022-12-15T21:05:41.160353",
+      "commentList": [
+        {
+          "commentId": 1,
+          "contents": "게시글1 댓글 내용1",
+          "createdAt": "2022-12-15T21:05:41.233368",
+          "modifiedAt": "2022-12-15T21:05:41.160353",
+          "nickname": "작성자 이름1"
+        },
+        {
+          "commentId": 2,
+          "contents": "게시글1 댓글 내용2",
+          "createdAt": "2022-12-15T21:05:41.24937",
+          "modifiedAt": "2022-12-15T21:05:41.160353",
+          "nickname": "작성자 이름"
+        }
+      ]
+    },
+    {
+      "musicId": 2,
+      "title": "음악 제목2",
+      "artist": "가수 이름",
+      "nickname": "작성자 이름",
+      "contents": "게시글 내용1",
+      "image": "asdfl;khas;ldfh",
+      "createdAt": "2022-12-15T21:05:41.160353",
+      "modifiedAt": "2022-12-15T21:05:41.160353",
+      "commentList": [
+        {
+          "commentId": 3,
+          "contents": "게시글2 댓글 내용1",
+          "createdAt": "2022-12-15T21:05:41.233368",
+          "modifiedAt": "2022-12-15T21:05:41.160353",
+          "nickname": "작성자 이름1"
+        },
+        {
+          "commentId": 4,
+          "contents": "게시글3 댓글 내용2",
+          "createdAt": "2022-12-15T21:05:41.24937",
+          "modifiedAt": "2022-12-15T21:05:41.160353",
+          "nickname": "작성자 이름"
+        }
+      ]
+    },
+    {
+      "musicId": 3,
+      "title": "음악 제목3",
+      "artist": "가수 이름",
+      "nickname": "작성자 이름",
+      "contents": "게시글 내용1",
+      "image": "asdfl;khas;ldfh",
+      "createdAt": "2022-12-15T21:05:41.160353",
+      "modifiedAt": "2022-12-15T21:05:41.160353",
+      "commentList": [
+        {
+          "commentId": 5,
+          "contents": "게시글3 댓글 내용1",
+          "createdAt": "2022-12-15T21:05:41.233368",
+          "modifiedAt": "2022-12-15T21:05:41.160353",
+          "nickname": "작성자 이름1"
+        },
+        {
+          "commentId": 6,
+          "contents": "게시글4 댓글 내용2",
+          "createdAt": "2022-12-15T21:05:41.24937",
+          "modifiedAt": "2022-12-15T21:05:41.160353",
+          "nickname": "작성자 이름"
+        }
+      ]
+    }
+  ],
+  "comment": [
+    {
+      "musicId": 1,
+      "commentId": 1,
+      "contents": "짧은 댓글",
+      "createdAt": "2022-12-15T21:05:41.24937",
+      "modifiedAt": "2022-12-15T21:05:41.160353",
+      "nickname": "ryan"
+    },
+    {
+      "musicId": 1,
+      "commentId": 2,
+      "contents": "엄청나게 긴 댓글 엄청나게 긴 댓글 엄청나게 긴 댓글 엄청나게 긴 댓글 엄청나게 긴 댓글 엄청나게 긴 댓글 사실 240자 정도로 제한하고 싶습니다",
+      "createdAt": "2022-12-15T21:05:41.24937",
+      "modifiedAt": "2022-12-15T21:05:41.160353",
+      "nickname": "작성자"
+    },
+    {
+      "commentId": 3,
+      "contents": "게시글1 댓글 내용2",
+      "createdAt": "2022-12-15T21:05:41.24937",
+      "modifiedAt": "2022-12-15T21:05:41.160353",
+      "nickname": "11223344"
+    }
+  ]
+}

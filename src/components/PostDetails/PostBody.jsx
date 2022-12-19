@@ -11,7 +11,7 @@ const PostBody = () => {
   const { post, isLoading, error } = useSelector((state) => state.post)
 
   const [detailContent, setDetailContent] = useState({
-    /*  musicId: 0,
+    musicId: 0,
     title: "HARD CODE**NEXT EPISODE",
     artist: "AKMU",
     nickname: "Ryan",
@@ -21,7 +21,7 @@ const PostBody = () => {
       "https://cdnimg.melon.co.kr/cm2/album/images/106/61/658/10661658_20210726111159_500.jpg?a937828fb23cb2663ea6063523e14fc3",
     createdAt: "2022-12-15T21:05:41.160353",
     modifiedAt: "2022-12-15T21:05:41.160353",
-    commentList: [], */
+    commentList: [],
   })
   const param = useParams()
   const paramId = parseInt(param.id)
@@ -46,56 +46,63 @@ const PostBody = () => {
   if (error) return <div>{error.msg}</div>
 
   return (
-    <>
-      <StHeader className={classes.titleBox}>
-        &nbsp;
-        <div>
-          <h2>{detailContent?.title}</h2>
-          <br />
-          <h3>{detailContent?.artist}</h3>
-        </div>
-        <div>
-          <Button>수정</Button>
-          <Button>삭제</Button>
-        </div>
-      </StHeader>
-      <StDetailBody>
-        <img
-          src={detailContent?.image}
-          alt={`${detailContent?.artist}의 ${detailContent?.title} 앨범 커버`}
-        ></img>
-        <p>{detailContent?.contents}</p>
-      </StDetailBody>
-    </>
+    <StDetailWrapper>
+      <StTitle>
+        {/* 이름 엄청나게 길 경우에 몇 자로 자르는 거 잊지 말 것 */}
+        <h2>{detailContent?.title}</h2>
+        <h3>{detailContent?.artist}</h3>
+      </StTitle>
+      <ElBtnBox>
+        <Button>수정</Button>
+        <Button>삭제</Button>
+      </ElBtnBox>
+      <ElCover
+        style={{ gridArea: "albumCover" }}
+        src={detailContent?.image}
+        alt={`${detailContent?.artist}의 ${detailContent?.title} 앨범 커버`}
+      ></ElCover>
+      <p style={{ gridArea: "review" }}>{detailContent?.contents}</p>
+    </StDetailWrapper>
   )
 }
 
 export default PostBody
 
-const StHeader = styled.div`
-  width: 100%;
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin-right: 0 auto;
-    margin-left: auto;
-    text-align: center;
+const StDetailWrapper = styled.div`
+  display: grid;
+  height: 800px;
+  grid-template-columns: 10% 1fr 10%;
+  grid-template-rows: 50px 40px 1fr 40px 1fr;
+  grid-template-areas:
+    ". title btnBox"
+    ". . ."
+    ". albumCover ."
+    ". . ."
+    ". review .";
+`
+
+const StTitle = styled.div`
+  display: grid;
+  align-content: center;
+  h2,
+  h3 {
+    margin-block: 0;
+    margin-bottom: 5px;
   }
+  width: 100%;
+  text-align: center;
   grid-area: title;
 `
 
-const StDetailBody = styled.div`
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+const ElBtnBox = styled.div`
+  display: grid;
+  align-content: center;
+  /* margin-right: 0 auto; */
+  margin-left: auto;
+  grid-area: btnBox;
+`
+
+const ElCover = styled.img`
   width: 100%;
-  img {
-    width: 100%;
-  }
-  p {
-    margin: 40px 0px 40px;
-  }
+  grid-area: albumCover;
 `
