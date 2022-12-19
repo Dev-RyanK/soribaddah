@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { postSignupInstance } from "../../shared/instance"
+import { instance, postSignupInstance } from "../../shared/instance"
 
 const initialState = {
   signup: {
