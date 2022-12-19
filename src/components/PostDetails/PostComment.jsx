@@ -50,7 +50,7 @@ const PostComment = () => {
   const dispatch = useDispatch()
   const fetchCommentContent = async () => {
     try {
-      const data = await commentGetInstance.get(`?musicId=${paramId}`)
+      const data = await commentGetInstance.get(`/${paramId}`)
       setComments([...data.data])
       // setToggleInput(toggle)
     } catch (error) {
@@ -99,13 +99,14 @@ const PostComment = () => {
 export default PostComment
 
 const StCommentWrapper = styled.div`
+  /* height: 10%; */
   display: grid;
   grid-template-columns: 10% repeat(4, 1fr) 10%;
   grid-template-rows: repeat(3, 1fr);
   grid-template-areas:
     ". icon1 icon2 icon3 icon4 ."
-    ". commentForm commentForm commentForm commentForm ."
-    ". commentList commentList commentList commentList .";
+    "commentForm commentForm commentForm commentForm commentForm commentForm"
+    "commentList commentList commentList commentList commentList commentList";
   grid-area: comments;
 `
 
@@ -114,10 +115,10 @@ const StIcons = styled.div`
 `
 
 const StCommentForm = styled.form`
-  /*   display: flex;
+  display: flex;
   align-items: center;
   flex-direction: column;
-  justify-content: center; */
+  justify-content: center;
   width: 100%;
   button {
     width: fit-content;
