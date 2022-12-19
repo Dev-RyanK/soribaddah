@@ -6,8 +6,8 @@ const Input = (props) => {
     type,
     minLength,
     maxLength,
-    // name,
-    // value,
+    name,
+    value,
     placeholder,
     size,
     required,
@@ -24,8 +24,8 @@ const Input = (props) => {
       type={type}
       minLength={minLength}
       maxLength={maxLength}
-      // name={name}
-      // value={value}
+      name={name}
+      value={value}
       placeholder={placeholder}
       size={size}
       onChange={onChange}
@@ -38,8 +38,8 @@ Input.defaultProps = {
   type: "text",
   minLength: "",
   maxLength: "",
-  // name: "",
-  // value: "",
+  name: undefined,
+  value: undefined,
   placeholder: "",
   size: "",
   children: null,

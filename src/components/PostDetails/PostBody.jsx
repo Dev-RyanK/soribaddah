@@ -11,7 +11,7 @@ const PostBody = () => {
   const { post, isLoading, error } = useSelector((state) => state.post)
 
   const [detailContent, setDetailContent] = useState({
-    /*  musicId: 0,
+    musicId: 0,
     title: "HARD CODE**NEXT EPISODE",
     artist: "AKMU",
     nickname: "Ryan",
@@ -21,7 +21,7 @@ const PostBody = () => {
       "https://cdnimg.melon.co.kr/cm2/album/images/106/61/658/10661658_20210726111159_500.jpg?a937828fb23cb2663ea6063523e14fc3",
     createdAt: "2022-12-15T21:05:41.160353",
     modifiedAt: "2022-12-15T21:05:41.160353",
-    commentList: [], */
+    commentList: [],
   })
   const param = useParams()
   const paramId = parseInt(param.id)
