@@ -1,1 +1,31 @@
+.animated-title {
+  position: relative;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  overflow-x: hidden;
+  overflow-y: hidden;
+}
 
+.track {
+  position: absolute;
+  white-space: nowrap;
+  will-change: transform;
+  animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+  from {
+    transform: translateX(0%);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+@media (hover: hover) and (min-width: 700px) {
+  .animated-title .content {
+    -webkit-transform: translateY(calc(100% - 8rem));
+    transform: translateY(calc(100% - 8rem));
+  }
+}

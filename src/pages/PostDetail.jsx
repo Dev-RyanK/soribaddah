@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux"
 import styled from "styled-components"
 import PostBody from "../components/PostDetails/PostBody"
 import PostComment from "../components/PostDetails/PostComment"
@@ -8,7 +7,6 @@ const PostDetail = () => {
     <StWrapper>
       <StDetailContent>
         <PostBody />
-        <PostComment />
       </StDetailContent>
     </StWrapper>
   )
