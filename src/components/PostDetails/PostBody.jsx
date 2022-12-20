@@ -1,16 +1,17 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
+
 import styled from "styled-components"
 import classes from "../PostDetails/PostBody.module.css"
-import { getPost, __getPost } from "../../redux/modules/postDetailSlice"
-import { toggle, goToggle } from "../../redux/modules/togglePageSlice"
-import { postGetInstance } from "../../shared/instance"
+
+import { goToggle } from "../../redux/modules/togglePageSlice"
+import { api, apis } from "../../shared/api"
+
 import PostComment from "./PostComment"
 import Button from "../elements/Button"
 import Input from "../elements/Input"
 import Textarea from "../elements/Textarea"
-import { DB } from "../../shared/instance"
 
 const PostBody = () => {
   const { post, isLoading, error } = useSelector((state) => state.post)
@@ -34,11 +35,10 @@ const PostBody = () => {
   const paramId = parseInt(param.id)
   const dispatch = useDispatch()
   const fetchDetailContent = async () => {
-    // dispatch(__getPost(paramId))
-    // setDetailContent(post)
     try {
-      const data = await postGetInstance.get(`/${paramId}`)
-      setDetailContent(...data.data)
+      // 이거 이렇게 바로 가져오지 말고 thunk로 비동기 처리 해야할 것 같음
+      const musicData = await api.get(`/api/music/${paramId}`)
+      setDetailContent(musicData.data.data)
     } catch (error) {
       console.log(error)
     }
@@ -46,6 +46,20 @@ const PostBody = () => {
   useEffect(() => {
     fetchDetailContent()
   }, [dispatch])
+
+  // 토큰 확인용
+  function getMus() {
+    api
+      .get(`/api/music/${paramId}`)
+      .then((res) => console.log(res))
+      .catch((err) => {
+        console.log(err)
+        /* console.log(
+          `AccessToken: ${err.response.config.headers.AccessToken}\n\nRefreshToken: ${err.response.config.headers.RefreshToken}`
+        ) */
+      })
+  }
+  // getMus()
 
   if (isLoading) return <div>Loading...</div>
 
