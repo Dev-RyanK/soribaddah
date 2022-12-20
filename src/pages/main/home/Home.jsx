@@ -6,11 +6,11 @@ import { __getMusic } from "../../../redux/modules/todoSlice";
 
 const Home = () => {
   const navigate = useNavigate();
-  const musics = useSelector((state) => state.music.music);
+  const musics = useSelector((state) => state.data);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(__getMusic());
+    // dispatch(__getMusic());
   }, [dispatch]);
 
   return (
@@ -25,12 +25,12 @@ const Home = () => {
         </button>
       </div>
       {musics &&
-        musics.map((music, index) => {
+        musics.map((music) => {
           return (
-            <button
-              key={index}
+            <div
+              key={music.musicId}
               onClick={() => {
-                navigate(`/PostDeatail/${music.id}`);
+                navigate(`/music/${music.musicId}`);
               }}
             >
               {music.artist}-{music.title}
@@ -42,7 +42,7 @@ const Home = () => {
                 }}
               />
               <div>{music.contents}</div>
-            </button>
+            </div>
           );
         })}
     </div>
