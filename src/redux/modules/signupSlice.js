@@ -1,10 +1,5 @@
-import axios from "axios"
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import {
-  commentGetInstance,
-  postSignupInstance,
-  instance,
-} from "../../shared/instance"
+import { instance, postSignupInstance } from "../../shared/instance"
 
 const initialState = {
   signup: {

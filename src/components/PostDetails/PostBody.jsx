@@ -2,10 +2,15 @@ import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useParams } from "react-router-dom"
 import styled from "styled-components"
+import classes from "../PostDetails/PostBody.module.css"
 import { getPost, __getPost } from "../../redux/modules/postDetailSlice"
-import { instance, postGetInstance } from "../../shared/instance"
-import Button from "../../components/elements/Button"
-import classes from "./PostBody.module.css"
+import { toggle, goToggle } from "../../redux/modules/togglePageSlice"
+import { postGetInstance } from "../../shared/instance"
+import PostComment from "./PostComment"
+import Button from "../elements/Button"
+import Input from "../elements/Input"
+import Textarea from "../elements/Textarea"
+import { DB } from "../../shared/instance"
 
 const PostBody = () => {
   const { post, isLoading, error } = useSelector((state) => state.post)
@@ -23,6 +28,8 @@ const PostBody = () => {
     modifiedAt: "2022-12-15T21:05:41.160353",
     commentList: [],
   })
+  // const [toggleInput, setToggleInput] = useState(false)
+  const { toggle } = useSelector((state) => state.toggle)
   const param = useParams()
   const paramId = parseInt(param.id)
   const dispatch = useDispatch()
@@ -30,13 +37,12 @@ const PostBody = () => {
     // dispatch(__getPost(paramId))
     // setDetailContent(post)
     try {
-      const data = await postGetInstance.get(`?musicId=${paramId}`)
+      const data = await postGetInstance.get(`/${paramId}`)
       setDetailContent(...data.data)
     } catch (error) {
       console.log(error)
     }
   }
-
   useEffect(() => {
     fetchDetailContent()
   }, [dispatch])
@@ -45,40 +51,110 @@ const PostBody = () => {
 
   if (error) return <div>{error.msg}</div>
 
-  return (
-    <StDetailWrapper>
-      <StTitle>
-        {/* 이름 엄청나게 길 경우에 몇 자로 자르는 거 잊지 말 것 */}
-        <h2>{detailContent?.title}</h2>
-        <h3>{detailContent?.artist}</h3>
-      </StTitle>
-      <ElBtnBox>
-        <Button>수정</Button>
-        <Button>삭제</Button>
-      </ElBtnBox>
-      <ElCover
-        style={{ gridArea: "albumCover" }}
-        src={detailContent?.image}
-        alt={`${detailContent?.artist}의 ${detailContent?.title} 앨범 커버`}
-      ></ElCover>
-      <p style={{ gridArea: "review" }}>{detailContent?.contents}</p>
-    </StDetailWrapper>
-  )
+  // 상세페이지 보기 모드
+  if (toggle === "unset")
+    return (
+      <StDetailWrapper>
+        <StTitle>
+          {/* 긴 이름 슬라이드(작업 중)*/}
+          {detailContent?.title.length > 40 ? (
+            <div className={classes.animatedTitle}>
+              <div className={classes.track}>
+                <h2>
+                  {detailContent?.title}&nbsp;{detailContent?.title}&nbsp;
+                  {detailContent?.title}&nbsp;{detailContent?.title}&nbsp;
+                  {detailContent?.title}&nbsp;{detailContent?.title}
+                </h2>
+              </div>
+            </div>
+          ) : (
+            // 특정 글자수 이하일 때
+            <h2>{detailContent?.title}</h2>
+          )}
+          <h3>{detailContent?.artist}</h3>
+        </StTitle>
+        <ElBtnBox>
+          <Button
+            onClick={() => {
+              // setToggleInput(!toggleInput)
+              dispatch(goToggle("none"))
+            }}
+          >
+            수정
+          </Button>
+          <Button>삭제</Button>
+        </ElBtnBox>
+        <ElCover
+          style={{ gridArea: "albumCover" }}
+          src={detailContent?.image}
+          alt={`${detailContent?.artist}의 ${detailContent?.title} 앨범 커버`}
+        ></ElCover>
+        <p style={{ gridArea: "review" }}>{detailContent?.contents}</p>
+        <PostComment />
+      </StDetailWrapper>
+    )
+
+  // 수정모드 전환 시
+  if (toggle === "none")
+    return (
+      // 인풋 전환, display: unset, comment 숨김상태로
+      <StFormWrapper>
+        <StTitle>
+          <Input defaultValue={detailContent?.title} />
+          <Input defaultValue={detailContent?.artist} />
+        </StTitle>
+        <ElBtnBox>
+          <Button
+            onClick={() => {
+              dispatch(goToggle("unset"))
+            }}
+          >
+            확인
+          </Button>
+          <Button>삭제</Button>
+        </ElBtnBox>
+        <ElCover></ElCover>
+        <ElURL
+          style={{ gridArea: "albumCover" }}
+          defaultValue={detailContent?.image}
+        />
+        <textarea
+          style={{ gridArea: "review" }}
+          defaultValue={detailContent?.contents}
+        />
+      </StFormWrapper>
+    )
 }
 
 export default PostBody
 
 const StDetailWrapper = styled.div`
   display: grid;
-  height: 800px;
+  height: 1000px;
   grid-template-columns: 10% 1fr 10%;
-  grid-template-rows: 50px 40px 1fr 40px 1fr;
+  grid-template-rows: 50px 40px 1fr 40px 1fr 1fr;
   grid-template-areas:
     ". title btnBox"
     ". . ."
     ". albumCover ."
     ". . ."
-    ". review .";
+    ". review ."
+    "comments comments comments";
+`
+
+const StFormWrapper = styled.div`
+  display: grid;
+  height: 800px;
+  width: 100%;
+  grid-template-columns: 10% 1fr 10%;
+  grid-template-rows: 50px 40px 1fr 40px 1fr 1fr;
+  grid-template-areas:
+    ". title btnBox"
+    ". . ."
+    ". albumCover ."
+    ". . ."
+    ". review ."
+    ". comments .";
 `
 
 const StTitle = styled.div`
@@ -104,5 +180,9 @@ const ElBtnBox = styled.div`
 
 const ElCover = styled.img`
   width: 100%;
+  grid-area: albumCover;
+`
+
+const ElURL = styled.input`
   grid-area: albumCover;
 `
