@@ -51,9 +51,11 @@ const ElButton = styled.button`
   border-radius: 0.5rem;
   background-color: white;
   color: var(--color-deepblue);
+  transition: 0.3s;
   :hover {
     background-color: var(--color-deepblue);
     color: white;
+    opacity: 1;
   }
   cursor: pointer;
 `
