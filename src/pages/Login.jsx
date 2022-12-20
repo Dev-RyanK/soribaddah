@@ -1,10 +1,11 @@
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Input from "../components/elements/Input"
 import Button from "../components/elements/Button"
 import { useDispatch, useSelector } from "react-redux"
 import { __postLogin } from "../redux/modules/loginSlice"
 import { useNavigate } from "react-router-dom"
+// import { onSilentRefresh } from "../shared/api"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -26,13 +27,16 @@ const Login = () => {
       case logged.password.trim():
         return alert("비밀번호를 적어주세요")
       default:
-        // return await dispatch(__postLogin({ ...logged }))
-        console.log(logged)
-        navigate("/")
+        return await dispatch(__postLogin({ ...logged }))
+      // navigate("/")
     }
   }
 
   const dispatch = useDispatch()
+
+  useEffect(() => {
+    // onSilentRefresh()
+  }, [])
 
   return (
     <StSignupForm>
