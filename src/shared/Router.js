@@ -1,10 +1,12 @@
-import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Layout from "../components/Layout";
-import Header from "../components/Header";
-import Home from "../pages/main/home/Home";
-import PostDetail from "../pages/PostDetail";
-import AddList from "../pages/main/Add/AddList";
+import React from "react"
+import { BrowserRouter, Route, Routes } from "react-router-dom"
+import Layout from "../components/Layout"
+import Header from "../components/Header"
+import Home from "../pages/main/home/Home"
+import PostDetail from "../pages/PostDetail"
+import AddList from "../pages/main/Add/AddList"
+import Login from "../pages/Login"
+import Signup from "../pages/Signup"
 
 const Router = () => {
   return (
@@ -15,14 +17,14 @@ const Router = () => {
           <Route>
             <Route path="/" element={<Home />} />
             <Route path="/AddList" element={<AddList />} />
-            {/* 로그인 */}
-            {/* 회원가입 */}
+            <Route path="signup" element={<Signup />} />
+            <Route path="login" element={<Login />} />
             <Route path="music/:id" element={<PostDetail />} />
           </Route>
         </Routes>
       </Layout>
     </BrowserRouter>
-  );
-};
+  )
+}
 
-export default Router;
+export default Router
