@@ -1,8 +1,9 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
+import { api } from "../../shared/api";
 
 const initialState = {
-  music: [{}],
+  data: [{}],
   isLoading: false,
   error: null,
 };
@@ -11,7 +12,8 @@ export const __getMusic = createAsyncThunk(
   "music/getMusic",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.get(`/${payload}`, payload);
+      const data = await api.get(`/api/music`);
+      console.log(data);
       return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error);
