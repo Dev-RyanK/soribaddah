@@ -22,7 +22,6 @@ export const apis = {
         ...nickname,
       })
       .then((res) => {
-        console.log(res.data)
         alert("가입 성공!")
       })
       .catch((err) => alert(err.response.data.msg)),
@@ -41,10 +40,18 @@ export const apis = {
       .catch((err) => alert(err.response.data.msg))
   },
 
-  /****** 댓글 조회 (작업 중) ******/
-  /* getComment: (payload) => {
-    api.get(`/api/comment/${payload}`)
-  }, */
+  /****** 댓글 작성 ******/
+  postComment: (payload) => {
+    api
+      .post(`/api/comment/${payload}`)
+      .then((res) => {
+        console.log(res)
+        alert("작성 완료!")
+      })
+      .catch((err) => {
+        alert(err.response.data.msg)
+      })
+  },
 }
 
 /****** Interceptor ******/

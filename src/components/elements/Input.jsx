@@ -3,6 +3,7 @@ import styled from "styled-components"
 
 const Input = (props) => {
   const {
+    className,
     type,
     minLength,
     maxLength,
@@ -18,11 +19,18 @@ const Input = (props) => {
     width,
     margin,
     padding,
+    gridArea,
   } = props
-  const styles = { width: width, margin: margin, padding: padding }
+  const styles = {
+    width: width,
+    margin: margin,
+    padding: padding,
+    // gridArea: gridArea,
+  }
   return (
     <ElInput
       {...styles}
+      className={className}
       required={required}
       type={type}
       minLength={minLength}
@@ -55,13 +63,14 @@ Input.defaultProps = {
   width: "100%",
   margin: "",
   padding: "",
+  // gridArea: "",
   onChange: () => {},
 }
 
 export default Input
 
 const ElInput = styled.input`
-  border: 2px solid var(--color-deepblue);
+  border: 1px solid var(--color-deepblue);
   border-radius: 0.5rem;
   margin-bottom: 4px;
 `

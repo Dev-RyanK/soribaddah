@@ -9,12 +9,18 @@ const Button = (props) => {
     onClick,
     text,
     width,
+    height,
     margin,
     padding,
     children,
   } = props
 
-  const styles = { margin: margin, width: width, padding: padding }
+  const styles = {
+    margin: margin,
+    width: width,
+    height: height,
+    padding: padding,
+  }
 
   return (
     <>
@@ -39,6 +45,7 @@ Button.defaultProps = {
   // onClick: null,
   text: false,
   width: "100%",
+  height: "",
   margin: "",
   padding: "10px",
   children: null,
@@ -47,7 +54,8 @@ Button.defaultProps = {
 export default Button
 
 const ElButton = styled.button`
-  border: 2px solid var(--color-deepblue);
+  margin-bottom: 4px;
+  border: 1px solid var(--color-deepblue);
   border-radius: 0.5rem;
   background-color: white;
   color: var(--color-deepblue);
