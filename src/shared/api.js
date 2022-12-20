@@ -1,6 +1,5 @@
 import axios from "axios"
 
-// "http://localhost:3003"
 export const DB = process.env.React_APP_DBSERVER
 
 export const api = axios.create({
@@ -37,39 +36,16 @@ export const apis = {
         localStorage.setItem("ACCESS_TOKEN", res.headers.accesstoken)
         localStorage.setItem("REFRESH_TOKEN", res.headers.refreshtoken)
         const { accessToken } = res.headers.accesstoken
-        // API 요청시마다 헤더에 accessToken 담아 보냄
-        // axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`
-        // api.defaults.headers.common["Authorization"] = accessToken
         api.defaults.headers["AccessToken"] = accessToken
       })
       .catch((err) => alert(err.response.data.msg))
   },
 
   /****** 댓글 조회 (작업 중) ******/
-  getComment: (payload) => {
+  /* getComment: (payload) => {
     api.get(`/api/comment/${payload}`)
-  },
+  }, */
 }
-
-/* export const onSilentRefresh = () => {
-  axios
-    .post("/api/silent-refresh")
-    .then(onLoginSuccess)
-    .catch((error) => {
-      console.log(`${error.message}: 로그인이 실패하였습니다`)
-    })
-} */
-
-/* export const onLoginSuccess = (res) => {
-  const { accessToken } = res.headers.accesstoken
-
-  // API 요청시마다 헤더에 accessToken 담아 보냄
-  // axios.defaults.headers.common["Authorization"] = `Bearer ${accessToken}`
-  api.defaults.headers.common["Authorization"] = accessToken
-
-  // accessToken 만료 1분 전 로그인 연장
-  setTimeout(onSilentRefresh, JWT_EXPIRY_TIME - 60000)
-} */
 
 /****** Interceptor ******/
 api.interceptors.request.use(function (config) {
@@ -88,41 +64,15 @@ api.interceptors.request.use(function (config) {
 
 //AccessToken이 만료됐을때 처리
 api.interceptors.response.use(
-  function (response) {
-    return response
+  function (res) {
+    return res
   },
-  async function (err) {
-    const originalConfig = err.config
-    // if (err.response || err.response.status === 401) {
-    if (err.response.status === 401) {
-      const rToken = originalConfig.headers["RefreshToken"]
-      try {
-        const data = await api({
-          // url: `refreshtoken담아 보낼 URL`,
-          url: DB,
-          method: "GET",
-          headers: {
-            RefreshToken: rToken,
-          },
-        })
-        // const data = await api.get(DB, { headers: { RefreshToken: rToken } })
-        if (data) {
-          console.log(data)
-          /* localStorage.setItem(
-            "ACCESS_TOKEN",
-            // JSON.stringify(data.data, ["AccessToken", "RefreshToken"])
-            JSON.stringify(data.data, ["AccessToken", "RefreshToken"])
-          ) */
-          // originalConfig
-          return await api.request(originalConfig)
-        }
-      } catch (err) {
-        // console.log(originalConfig)
-        console.log("토큰 갱신 에러")
-      }
-      return Promise.reject(err)
-    }
-    return Promise.reject(err)
+  function (err) {
+    const token = localStorage.getItem("ACCESS_TOKEN") // 헌 토큰
+    const rToken = localStorage.getItem("REFRESH_TOKEN")
+    err.headers["AccessToken"] = token
+    err.headers["RefreshToken"] = rToken
+    return err
   }
 )
 
