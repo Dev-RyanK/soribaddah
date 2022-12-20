@@ -7,6 +7,7 @@ import PostDetail from "../pages/PostDetail"
 import AddList from "../pages/main/Add/AddList"
 import Login from "../pages/Login"
 import Signup from "../pages/Signup"
+import HomeCardList from "../pages/main/home/HomeCardList"
 
 const Router = () => {
   return (
@@ -16,6 +17,7 @@ const Router = () => {
         <Routes>
           <Route>
             <Route path="/" element={<Home />} />
+            <Route path="/music" element={<HomeCardList />} />
             <Route path="/AddList" element={<AddList />} />
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
