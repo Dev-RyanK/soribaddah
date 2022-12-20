@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { postSignupInstance } from "../../shared/instance"
+import { apis } from "../../shared/api"
 
 const initialState = {
   login: {
@@ -12,14 +12,12 @@ const initialState = {
   msg: "",
 }
 
-// 192.168.4.212:8080/api/login
-
 // thunk
 export const __postLogin = createAsyncThunk(
-  "signup",
+  "post/login",
   async (payload, thunkAPI) => {
     try {
-      await postSignupInstance.post(`/login`, payload)
+      await apis.login(payload)
       return thunkAPI.fulfillWithValue(alert("로그인 되었습니다."))
     } catch (err) {
       return thunkAPI.rejectWithValue(err.msg)
@@ -32,7 +30,7 @@ const loginSlice = createSlice({
   initialState,
   reducers: {
     postSignup: (state, action) => {
-      postSignupInstance.post(`/login`, action.payload)
+      apis.login(action.payload)
     },
   },
   extraReducers: (builder) => {

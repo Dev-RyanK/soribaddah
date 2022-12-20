@@ -1,5 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { commentGetInstance, instance } from "../../shared/instance"
+import { commentGetInstance, api } from "../../shared/api"
 
 const initialState = {
   comment: {
@@ -20,8 +20,9 @@ export const __getComment = createAsyncThunk(
   "comment/get",
   async (payload, thunkAPI) => {
     try {
-      const data = await commentGetInstance.get(`/${payload}`, payload)
-      return thunkAPI.fulfillWithValue(data.data)
+      // apis에 새로 작업 후 연결 필요
+      // const data = await commentGetInstance.get(`/${payload}`, payload)
+      // return thunkAPI.fulfillWithValue(data.data)
     } catch (err) {
       return thunkAPI.rejectWithValue(err.msg)
     }

@@ -27,6 +27,7 @@ const Signup = () => {
         return alert("닉네임을 적어주세요")
       default:
         return await dispatch(__postSignup({ ...info }))
+      // return console.log({ ...info })
     }
   }
 

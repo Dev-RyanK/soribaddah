@@ -105,7 +105,9 @@ api.interceptors.response.use(
             RefreshToken: rToken,
           },
         })
+        // const data = await api.get(DB, { headers: { RefreshToken: rToken } })
         if (data) {
+          console.log(data)
           /* localStorage.setItem(
             "ACCESS_TOKEN",
             // JSON.stringify(data.data, ["AccessToken", "RefreshToken"])

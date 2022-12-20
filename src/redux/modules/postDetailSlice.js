@@ -1,6 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit"
-import { instance, postGetInstance } from "../../shared/instance"
-// import apiKeys from "../../shared/apiKeys"
+import { apis } from "../../shared/api"
 
 const initialState = {
   post: {
@@ -25,8 +24,9 @@ export const __getPost = createAsyncThunk(
   "music/get",
   async (payload, thunkAPI) => {
     try {
-      const data = await postGetInstance.get(`/${payload}`, payload)
-      return thunkAPI.fulfillWithValue(data.data)
+      // 작동하게 해 놓을 것!!
+      // const data = await apis.getMusic(`/${payload}`, payload)
+      // return thunkAPI.fulfillWithValue(data.data)
     } catch (error) {
       return thunkAPI.rejectWithValue(error.msg)
     }
@@ -38,13 +38,13 @@ const postDetailSlice = createSlice({
   initialState,
   reducers: {
     /* getPost: (state, action) => {
-      instance.patch(`/music/${action.payload}`)
+      api.patch(`/api/music/${action.payload}`)
       state.post = action.payload
     }, */
-    updatePost: (state, action) => {
-      instance.patch(`/music/${action.payload}`)
+    /* updatePost: (state, action) => {
+      api.patch(`/api/music/${action.payload}`)
       state.post = action.payload
-    },
+    }, */
   },
   extraReducers: (builder) => {
     builder
