@@ -1,13 +1,20 @@
-import React from "react";
-import { Navigate, useNavigate } from "react-router-dom";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 import classes from "../home/Home.module.css";
-import HomeCardList from "./HomeCardList";
+import { __getMusic } from "../../../redux/modules/todoSlice";
 
 const Home = () => {
   const navigate = useNavigate();
+  const musics = useSelector((state) => state.music.music);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    dispatch(__getMusic());
+  }, [dispatch]);
 
   return (
-    <>
+    <div>
       <div className={classes.header}>
         <button
           onClick={() => {
@@ -17,8 +24,28 @@ const Home = () => {
           추천하기
         </button>
       </div>
-      <HomeCardList />
-    </>
+      {musics &&
+        musics.map((music, index) => {
+          return (
+            <button
+              key={index}
+              onClick={() => {
+                navigate(`/PostDeatail/${music.id}`);
+              }}
+            >
+              {music.artist}-{music.title}
+              <img
+                src={music.image}
+                style={{
+                  width: "250px",
+                  height: "250px",
+                }}
+              />
+              <div>{music.contents}</div>
+            </button>
+          );
+        })}
+    </div>
   );
 };
 
