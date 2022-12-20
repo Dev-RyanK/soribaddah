@@ -7,4 +7,5 @@ const store = configureStore({
   reducer: { post: post, signup: signup, toggle: toggle },
 })
 
-export default store
+
+export default store;
