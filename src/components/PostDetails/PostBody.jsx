@@ -40,7 +40,7 @@ const PostBody = () => {
       const musicData = await api.get(`/api/music/${paramId}`)
       setDetailContent(musicData.data.data)
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
   }
   useEffect(() => {
@@ -54,9 +54,9 @@ const PostBody = () => {
       .then((res) => console.log(res))
       .catch((err) => {
         console.log(err)
-        /* console.log(
+        console.log(
           `AccessToken: ${err.response.config.headers.AccessToken}\n\nRefreshToken: ${err.response.config.headers.RefreshToken}`
-        ) */
+        )
       })
   }
   // getMus()
