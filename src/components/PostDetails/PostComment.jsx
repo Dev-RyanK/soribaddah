@@ -11,12 +11,12 @@ import {
   faRepeat,
   faPlus,
 } from "@fortawesome/free-solid-svg-icons"
-/* import { FontAwesomeIconProps } from "@fortawesome/react-fontawesome"
-import { FontawesomeObject } from "@fortawesome/fontawesome-svg-core" */
+
+import { api } from "../../shared/api"
 
 import Button from "../../components/elements/Button"
 import Textarea from "../../components/elements/Textarea"
-import { commentGetInstance } from "../../shared/instance"
+import { commentGetInstance } from "../../shared/api"
 import { toggle } from "../../redux/modules/togglePageSlice"
 
 const PostComment = () => {
@@ -50,8 +50,8 @@ const PostComment = () => {
   const dispatch = useDispatch()
   const fetchCommentContent = async () => {
     try {
-      const data = await commentGetInstance.get(`/${paramId}`)
-      setComments([...data.data])
+      // const data = await api.get(`/comment/${paramId}`)
+      // setComments([...data.data])
       // setToggleInput(toggle)
     } catch (error) {
       console.log(error)
