@@ -12,16 +12,18 @@ import {
   faPlus,
 } from "@fortawesome/free-solid-svg-icons"
 
-import { api } from "../../shared/api"
-
+// import { api } from "../../shared/api"
 import Button from "../../components/elements/Button"
 import Textarea from "../../components/elements/Textarea"
-import { commentGetInstance } from "../../shared/api"
+// import { commentGetInstance } from "../../shared/instance"
 import { toggle } from "../../redux/modules/togglePageSlice"
+import { api, apis } from "../../shared/api"
 
 const PostComment = () => {
   const [toggleInput, setToggleInput] = useState(false)
   const [commentToggle, setCommentToggle] = useState(false)
+  const [comment, setComment] = useState("")
+  // const [user] // 코멘트 작성하는 유저 닉네임 받아서 같이 넣어야 됨
   const { post, isLoading, error } = useSelector((state) => state.post)
   const { toggle } = useSelector((state) => state.toggle)
 
@@ -50,12 +52,19 @@ const PostComment = () => {
   const dispatch = useDispatch()
   const fetchCommentContent = async () => {
     try {
-      // const data = await api.get(`/comment/${paramId}`)
-      // setComments([...data.data])
+      const data = await api.get(`/api/music/${paramId}`)
+      setComments([...data.data.commentList])
       // setToggleInput(toggle)
     } catch (error) {
       console.log(error)
     }
+  }
+  const commentOnChange = (e) => {
+    setComment(e.target.value)
+  }
+  const onsubmitHandler = (e) => {
+    e.preventDefault()
+    // apis.postComment(comment) // 내용만 들어가면 안 되고 형식 맞춰서!
   }
 
   useEffect(() => {
@@ -63,29 +72,64 @@ const PostComment = () => {
   }, [dispatch])
 
   return (
-    <StCommentWrapper style={{ display: `${toggleInput}` }}>
-      <FontAwesomeIcon icon={faVolumeHigh} style={{ gridArea: "icon1" }} />
-      <FontAwesomeIcon icon={faShuffle} style={{ gridArea: "icon2" }} />
-      <FontAwesomeIcon icon={faRepeat} style={{ gridArea: "icon3" }} />
-      <FontAwesomeIcon icon={faPlus} style={{ gridArea: "icon4" }} />
+    <StCommentWrapper
+      style={{ display: `${toggleInput}` }}
+      onsubmit={(e) => {
+        e.preventDefault()
+      }}
+    >
+      <FontAwesomeIcon
+        icon={faVolumeHigh}
+        className={classes.icons}
+        style={{ gridArea: "icon1" }}
+      />
+      <FontAwesomeIcon
+        icon={faShuffle}
+        className={classes.icons}
+        style={{ gridArea: "icon2" }}
+      />
+      <FontAwesomeIcon
+        icon={faRepeat}
+        className={classes.icons}
+        style={{ gridArea: "icon3" }}
+      />
+      <FontAwesomeIcon
+        icon={faPlus}
+        className={classes.icons}
+        style={{ gridArea: "icon4" }}
+      />
       <StCommentForm>
-        {/* 댓글 등록란 토글 */}
-        <Textarea hidden={!commentToggle} />
+        {/* 댓글 등록란 */}
+        <Textarea
+          className={classes.reviewText}
+          hidden={!commentToggle}
+          onChange={commentOnChange}
+        />
+
         <Button
           type="button"
           hidden={false}
           onClick={() => {
             setCommentToggle(!commentToggle)
+            // dispatch 해야됨
           }}
         >
           댓글 등록하기
         </Button>
       </StCommentForm>
+
+      {/* 코맨트 리스트 출력 */}
       <StCommentList>
         {comments?.map((item) => (
-          <span key={"span" + item.commentId} className={classes.commentBox}>
+          <span
+            key={"commentSpan" + item.commentId}
+            className={classes.commentBox}
+          >
             {item.contents} / {item.nickname}
-            <div key={"button" + item.commentId} className={classes.buttonBox}>
+            <div
+              key={"commentButton" + item.commentId}
+              className={classes.buttonBox}
+            >
               <Button>📝</Button>
               <Button>❌</Button>
             </div>
@@ -99,19 +143,15 @@ const PostComment = () => {
 export default PostComment
 
 const StCommentWrapper = styled.div`
-  /* height: 10%; */
   display: grid;
   grid-template-columns: 10% repeat(4, 1fr) 10%;
-  grid-template-rows: repeat(3, 1fr);
+  grid-auto-rows: repeat(3, 1fr);
   grid-template-areas:
     ". icon1 icon2 icon3 icon4 ."
-    "commentForm commentForm commentForm commentForm commentForm commentForm"
+    ". commentForm commentForm commentForm commentForm ."
     "commentList commentList commentList commentList commentList commentList";
   grid-area: comments;
-`
-
-const StIcons = styled.div`
-  grid-area: icons;
+  justify-items: center;
 `
 
 const StCommentForm = styled.form`
@@ -121,7 +161,7 @@ const StCommentForm = styled.form`
   justify-content: center;
   width: 100%;
   button {
-    width: fit-content;
+    width: 50%;
   }
   grid-area: commentForm;
 `
