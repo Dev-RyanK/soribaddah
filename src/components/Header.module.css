@@ -8,6 +8,11 @@
   max-width: 1200px;
 }
 
+.mainTitle {
+  font-family: "양진체";
+  font-size: xx-large;
+}
+
 .btn {
   /* float: right; */
   width: 100px;

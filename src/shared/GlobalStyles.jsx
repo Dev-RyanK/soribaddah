@@ -14,6 +14,11 @@ const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
     /* font-family: 'Noto Sans KR', sans-serif; */
   }
+
+  p, span, h2, h3, h4 {
+  font-family: "TTCrownMychewR";
+  font-weight: 100;
+  }
 `
 
 export default GlobalStyle
