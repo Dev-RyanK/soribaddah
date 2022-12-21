@@ -24,8 +24,8 @@ export const __addMusic = createAsyncThunk(
   "music/__addmusic",
   async (payload, thunkAPI) => {
     try {
-      const data = await axios.post(`/AddList`, payload)
-      return thunkAPI.fulfillWithValue(data.data)
+      const data = await api.post(`/music`, payload);
+      return thunkAPI.fulfillWithValue(data.data);
     } catch (error) {
       return thunkAPI.rejectWithValue(error)
     }
