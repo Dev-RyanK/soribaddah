@@ -3,7 +3,10 @@ import styled from "styled-components"
 import Input from "../components/elements/Input"
 import Button from "../components/elements/Button"
 import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+
 import { __postSignup } from "../redux/modules/signupSlice"
+import classes from "./Login/Login.module.css"
 
 const Signup = () => {
   const [info, setInfo] = useState({
@@ -11,7 +14,7 @@ const Signup = () => {
     password: "asd123!@#",
     nickname: "apitTest01",
   })
-
+  const navigate = useNavigate()
   const addInfo = (e) => {
     const { name, value } = e.target
     setInfo({ ...info, [name]: value })
@@ -27,22 +30,24 @@ const Signup = () => {
         return alert("닉네임을 적어주세요")
       default:
         return await dispatch(__postSignup({ ...info }))
-      // return console.log({ ...info })
     }
   }
 
   const dispatch = useDispatch()
 
   return (
-    <StSignupForm>
-      <ElForm
+    <div className={classes.loginWrap}>
+      <form
+        className={classes.loginForm}
         onSubmit={(e) => {
           onAddHandler(e)
+          navigate("/")
         }}
       >
         <h3>회원가입</h3>
         <Input
           required
+          className={classes.userInfo}
           placeholder="아이디"
           type="text"
           name="loginId"
@@ -54,6 +59,7 @@ const Signup = () => {
         />
         <Input
           required
+          className={classes.userInfo}
           placeholder="닉네임"
           type="text"
           name="nickname"
@@ -61,6 +67,7 @@ const Signup = () => {
         />
         <Input
           required
+          className={classes.userInfo}
           placeholder="비밀번호"
           type="password"
           minLength="8"
@@ -70,9 +77,11 @@ const Signup = () => {
           title="영어 대소문자, 숫자, 특수문자"
           onChange={addInfo}
         />
-        <Button type="submit">회원 가입</Button>
-      </ElForm>
-    </StSignupForm>
+        <Button type="submit" className={classes.loginBtn}>
+          회원 가입
+        </Button>
+      </form>
+    </div>
   )
 }
 

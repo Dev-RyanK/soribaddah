@@ -8,11 +8,11 @@
   display: flex;
   align-items: center;
   flex-direction: column;
-  width: 240px;
-  padding: 10px;
+  width: 300px;
+  padding: 30px;
   border: 2px solid var(--color-midblue);
   border-radius: 16px;
-  box-shadow: 6px 6px 2px 4px var(--color-midblue);
+  /* box-shadow: 6px 6px 2px 4px var(--color-midblue); */
 }
 
 .userInfo {
@@ -25,12 +25,13 @@
 
 .naverLoginBtn {
   width: 140px;
-  margin-top: 2px;
+  margin: 2px 0 10px;
 }
 
 .loginBtn {
   width: 140px;
   height: 2em;
   margin-top: 12px;
-  border-radius: 3px;
+  /* styled override 못함 */
+  /* border-radius: 3px; */
 }
