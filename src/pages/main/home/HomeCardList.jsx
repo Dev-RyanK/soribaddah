@@ -69,11 +69,13 @@ const HomeCardList = () => {
                   style={{ gridArea: "icon4" }}
                 />
               </span>
+              {/* <div key={"wrap" + music.musicId} className={classes.textWrap}> */}
               <h3 key={"h3" + music.musicId} className={classes.musicInfo}>
                 {music.title}
                 <br />
                 {music.artist}
               </h3>
+              {/* </div> */}
               <p key={"p" + music.musicId} className={classes.musicContents}>
                 {music.contents}
               </p>
