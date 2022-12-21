@@ -83,6 +83,9 @@ const Login = () => {
             )
           }}
         />
+        <Link to="/signup">
+          <span>회원가입</span>
+        </Link>
       </form>
     </div>
   )

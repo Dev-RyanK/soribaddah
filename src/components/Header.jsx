@@ -15,9 +15,6 @@ const Header = () => {
         <Link to={"/login"}>
           <Button className={classes.btn}>로그인</Button>
         </Link>
-        <Link to={"/signup"}>
-          <Button className={classes.btn}>회원가입</Button>
-        </Link>
       </div>
     </header>
   )
