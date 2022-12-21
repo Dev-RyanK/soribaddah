@@ -73,8 +73,8 @@ const Signup = () => {
           minLength="8"
           maxLength="15"
           name="password"
-          pattern="(?=.*[a-zA-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$"
-          title="영어 대소문자, 숫자, 특수문자"
+          pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,15}$"
+          title="영어 대/소문자, 숫자, 특수문자"
           onChange={addInfo}
         />
         <Button type="submit" className={classes.loginBtn}>

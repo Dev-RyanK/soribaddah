@@ -22,7 +22,8 @@ const HomeCardList = () => {
   }
 
   useEffect(() => {
-    dispatch(__getMusic())
+    /* non serializable */
+    // dispatch(__getMusic())
     fetchMusicList()
   }, [])
 
