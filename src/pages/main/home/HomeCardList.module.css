@@ -63,7 +63,7 @@
   max-width: 18ch;
   overflow: hidden;
   line-height: 1.4em;
-  /* margin-bottom: 10px 0px 10px; */
+  text-align: center;
 }
 
 .musicContents {
