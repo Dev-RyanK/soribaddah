@@ -1,62 +1,58 @@
-.header {
-  width: 800px;
-  height: 600px;
-  border: 1px solid white;
+.box {
+  width: 700px;
+  height: 800px;
+  margin: auto;
   border-radius: 10px;
+  display: grid;
+  gap: 30px;
+  grid-auto-rows: 50px 50px 200px 50px 50px;
+  justify-content: center;
+  border: 2px solid #37419a;
+  box-shadow: 10px 10px #84c0e9;
+}
+
+.head {
+  margin-top: 10px;
+  text-align: center;
   display: flex;
-  flex-direction: column;
-  margin: 0 auto;
-  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
-  margin-top: 20px;
+  justify-content: center;
+  color: #37419a;
 }
 
 .title {
-  margin-top: 20px;
-  height: 50px;
-  width: 100%;
-  font-size: 24px;
-  background-color: white !important;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  justify-content: space-between;
 }
-
+.title > input {
+  border: 1px solid #a9dfed;
+  border-radius: 10px;
+}
+.input[type="text"] {
+  border: 1px solid #a9dfed;
+  border-radius: 10px;
+}
 .image {
-  width: 83%;
-  height: 80px;
-  font-size: 24px;
-  margin: 30px auto 0 auto;
-  resize: none;
-  line-height: 40px;
-  border-color: rgb(184, 176, 176);
-  padding: 0 15px;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  text-align: center;
 }
 
-.comment {
-  margin-top: 20px;
-  margin-bottom: 30px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.comment > textarea {
+  width: 100%;
+  height: 6.25em;
+  border: none;
+  resize: none;
+  margin-bottom: 10px;
+  border: 1px solid #a9dfed;
+  border-radius: 10px;
 }
 
 .btn {
-  height: 50px;
-  width: 150px;
-  font-size: 24px;
-  /* padding: 10px; */
-  margin: 30px auto;
-  border-radius: 10px;
+  text-align: center;
   display: flex;
-  align-items: center;
   justify-content: center;
 }
 
-.inputTitle {
-  width: 600px;
-  height: 300px;
+.btn > button {
+  border-radius: 10px;
+  border: 1px solid #ebd6e8;
+  background-color: #a9dfed;
 }
