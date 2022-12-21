@@ -9,7 +9,7 @@ const Header = () => {
       {/* 그리드 중앙정렬용 빈칸 */}
       &nbsp;
       <Link to={"/"}>
-        <h1>소리받아</h1>
+        <h1 className={classes.mainTitle}>소리받아</h1>
       </Link>
       <div>
         <Link to={"/login"}>
