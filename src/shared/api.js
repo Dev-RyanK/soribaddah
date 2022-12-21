@@ -56,7 +56,7 @@ export const apis = {
   },
 
   /* 카카오 로그인 */
-  kakao: (kakaoCode) => {
+  /* kakao: (kakaoCode) => {
     axios
       .post(`https://kauth.kakao.com/oauth/token`, {
         headers: {
@@ -73,7 +73,7 @@ export const apis = {
           console.log("done")
         }
       })
-  },
+  }, */
 }
 
 /****** Interceptor ******/
@@ -93,13 +93,13 @@ api.interceptors.request.use(function (config) {
 
 //AccessToken이 만료됐을때 처리
 // 403일때?? 확정해서 if문 처리 (401은 로그아웃임)
-api.interceptors.response.use(
+/* api.interceptors.response.use(
   function (res) {
     return res
   },
   function (err) {
     if (
-      err.response.status === 403 ||
+      err.response.status >= 400 ||
       err.headers["AccessToken"] === undefined
     ) {
       console.log(err)
@@ -108,6 +108,43 @@ api.interceptors.response.use(
       err.headers["AccessToken"] = token
       err.headers["RefreshToken"] = rToken
       return err
+    }
+    return Promise.reject(err)
+  }
+) */
+
+api.interceptors.response.use(
+  (res) => res,
+  async (err) => {
+    const originalReq = err.config
+    if (
+      // err.response.status === 403 &&
+      err.response.status >= 400 /* &&
+      err.config */ /* && */
+      // !err.config.__isRetryRequest
+    ) {
+      // 401 이고, err.config가 있고, retry reqeust가 아니면 토큰 만료라고 판단하여 refresh 요청
+      originalReq._retry = true
+      // 만약 retry인 request가 401일 되면 위의 분기를 통해서 refresh하지 않는다.
+      try {
+        const res = await axios.post(`${DB}/api/login`, {
+          RefreshToken: localStorage.getItem("refresh_token"),
+        })
+        const data = res.data
+
+        localStorage.setItem("ACCESS_TOKEN", data.data.AccessToken)
+        localStorage.setItem("REFRESH_TOKEN", data.data.RefreshToken)
+
+        originalReq.headers.AccessToken = `${data.data.AccessToken}`
+
+        return axios(originalReq)
+      } catch (error) {
+        // refresh 토큰도 만료되었거나 오류 발생 시
+        // window.location.href = "/"
+        console.log(error)
+
+        return Promise.reject(err)
+      }
     }
     return Promise.reject(err)
   }
