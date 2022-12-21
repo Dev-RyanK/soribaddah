@@ -9,12 +9,20 @@ const Button = (props) => {
     onClick,
     text,
     width,
+    height,
     margin,
     padding,
+    borderRadius,
     children,
   } = props
 
-  const styles = { margin: margin, width: width, padding: padding }
+  const styles = {
+    margin: margin,
+    width: width,
+    height: height,
+    padding: padding,
+    borderRadius: borderRadius,
+  }
 
   return (
     <>
@@ -39,21 +47,26 @@ Button.defaultProps = {
   // onClick: null,
   text: false,
   width: "100%",
+  height: "",
   margin: "",
   padding: "10px",
+  borderRadius: "",
   children: null,
 }
 
 export default Button
 
 const ElButton = styled.button`
-  border: 2px solid var(--color-deepblue);
+  margin-bottom: 4px;
+  border: 1px solid var(--color-deepblue);
   border-radius: 0.5rem;
   background-color: white;
   color: var(--color-deepblue);
+  transition: 0.3s;
   :hover {
     background-color: var(--color-deepblue);
     color: white;
+    opacity: 1;
   }
   cursor: pointer;
 `

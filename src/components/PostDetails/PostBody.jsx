@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
-import { useParams } from "react-router-dom"
+import { useParams, useNavigate } from "react-router-dom"
 
 import styled from "styled-components"
 import classes from "../PostDetails/PostBody.module.css"
@@ -34,32 +34,24 @@ const PostBody = () => {
   const param = useParams()
   const paramId = parseInt(param.id)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const fetchDetailContent = async () => {
     try {
       // 이거 이렇게 바로 가져오지 말고 thunk로 비동기 처리 해야할 것 같음
       const musicData = await api.get(`/api/music/${paramId}`)
       setDetailContent(musicData.data.data)
     } catch (error) {
-      console.log(error)
+      // console.log(error)
     }
+  }
+
+  const onChangeHandler = (e) => {
+    const { name, value } = e.target
+    setDetailContent({ ...detailContent, [name]: value })
   }
   useEffect(() => {
     fetchDetailContent()
   }, [dispatch])
-
-  // 토큰 확인용
-  function getMus() {
-    api
-      .get(`/api/music/${paramId}`)
-      .then((res) => console.log(res))
-      .catch((err) => {
-        console.log(err)
-        /* console.log(
-          `AccessToken: ${err.response.config.headers.AccessToken}\n\nRefreshToken: ${err.response.config.headers.RefreshToken}`
-        ) */
-      })
-  }
-  // getMus()
 
   if (isLoading) return <div>Loading...</div>
 
@@ -70,11 +62,12 @@ const PostBody = () => {
     return (
       <StDetailWrapper>
         <StTitle>
+          <h3>{detailContent?.nickname}</h3>
           {/* 긴 이름 슬라이드(작업 중)*/}
           {detailContent?.title.length > 40 ? (
             <div className={classes.animatedTitle}>
               <div className={classes.track}>
-                <h2>
+                <h2 className={classes.slideText}>
                   {detailContent?.title}&nbsp;{detailContent?.title}&nbsp;
                   {detailContent?.title}&nbsp;{detailContent?.title}&nbsp;
                   {detailContent?.title}&nbsp;{detailContent?.title}
@@ -99,10 +92,9 @@ const PostBody = () => {
           <Button>삭제</Button>
         </ElBtnBox>
         <ElCover
-          style={{ gridArea: "albumCover" }}
           src={detailContent?.image}
           alt={`${detailContent?.artist}의 ${detailContent?.title} 앨범 커버`}
-        ></ElCover>
+        />
         <p style={{ gridArea: "review" }}>{detailContent?.contents}</p>
         <PostComment />
       </StDetailWrapper>
@@ -112,29 +104,64 @@ const PostBody = () => {
   if (toggle === "none")
     return (
       // 인풋 전환, display: unset, comment 숨김상태로
-      <StFormWrapper>
+      <StFormWrapper
+      /* onSubmit={(e) => {
+          e.preventDefault()
+          console.log(detailContent)
+        }} */
+      >
+        {/* 제목 / 가수 */}
         <StTitle>
-          <Input defaultValue={detailContent?.title} />
-          <Input defaultValue={detailContent?.artist} />
+          <Input
+            name="title"
+            defaultValue={detailContent?.title}
+            onChange={onChangeHandler}
+          />
+          <Input
+            name="artist"
+            defaultValue={detailContent?.artist}
+            onChange={onChangeHandler}
+          />
         </StTitle>
+        {/* 확인/취소 버튼 */}
         <ElBtnBox>
           <Button
-            onClick={() => {
+            type="submit"
+            onClick={(e) => {
               dispatch(goToggle("unset"))
+              // setDetailContent({ detailContent })
+              console.log(detailContent)
             }}
           >
             확인
           </Button>
-          <Button>삭제</Button>
+          <Button type="button" onClick={() => dispatch(goToggle("unset"))}>
+            취소
+          </Button>
         </ElBtnBox>
-        <ElCover></ElCover>
-        <ElURL
-          style={{ gridArea: "albumCover" }}
-          defaultValue={detailContent?.image}
+        <span className={classes.desc}>
+          ▲ 이전 이미지
+          <br />새 이미지 주소 ▼
+        </span>
+        {/* 이미지 보여주기 */}
+        <ElCover
+          src={detailContent?.image}
+          alt="이미지를 넣어주세요"
+          onChange={onChangeHandler}
         />
-        <textarea
-          style={{ gridArea: "review" }}
+        {/* 이미지 */}
+        <Input
+          name="image"
+          className={classes.albumURL}
+          defaultValue={detailContent?.image}
+          onChange={onChangeHandler}
+        />
+        {/* 리뷰 */}
+        <Textarea
+          name="contents"
+          className={classes.review}
           defaultValue={detailContent?.contents}
+          onChange={onChangeHandler}
         />
       </StFormWrapper>
     )
@@ -144,31 +171,29 @@ export default PostBody
 
 const StDetailWrapper = styled.div`
   display: grid;
-  height: 1000px;
   grid-template-columns: 10% 1fr 10%;
-  grid-template-rows: 50px 40px 1fr 40px 1fr 1fr;
+  grid-auto-rows: repeat(4, 1fr);
   grid-template-areas:
     ". title btnBox"
-    ". . ."
     ". albumCover ."
-    ". . ."
     ". review ."
     "comments comments comments";
+  row-gap: 20px;
 `
 
-const StFormWrapper = styled.div`
+const StFormWrapper = styled.form`
   display: grid;
-  height: 800px;
   width: 100%;
   grid-template-columns: 10% 1fr 10%;
-  grid-template-rows: 50px 40px 1fr 40px 1fr 1fr;
+  grid-auto-rows: repeat(6, 1fr);
   grid-template-areas:
     ". title btnBox"
-    ". . ."
     ". albumCover ."
-    ". . ."
+    ". desc ."
+    ". albumURL ."
     ". review ."
     ". comments .";
+  row-gap: 20px;
 `
 
 const StTitle = styled.div`
@@ -194,9 +219,5 @@ const ElBtnBox = styled.div`
 
 const ElCover = styled.img`
   width: 100%;
-  grid-area: albumCover;
-`
-
-const ElURL = styled.input`
   grid-area: albumCover;
 `

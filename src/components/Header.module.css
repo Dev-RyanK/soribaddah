@@ -1,4 +1,37 @@
-.header {
+.head {
+  display: grid;
+  grid-template-columns: 10% 1fr 10%;
+  grid-template-rows: 1fr;
+  justify-items: center;
+  align-items: center;
+  min-width: 800px;
+  max-width: 1200px;
+  height: 140px;
+}
+
+.mainTitle {
+  font-family: "양진체";
+  font-size: xx-large;
+}
+
+.btn {
+  /* float: right; */
+  width: 100px;
+  height: 40px;
+}
+
+a {
+  text-decoration: none;
+  color: var(--color-deepblue);
+  transition: 0.3s;
+}
+
+a:hover {
+  color: var(--color-lightblue);
+  opacity: 1;
+}
+/* 동균님 코드 */
+/* .head {
   width: 250px;
   height: 250px;
   border-radius: 10px;
@@ -15,23 +48,20 @@ h1 {
   width: 120px;
   height: 50px;
   border-radius: 10px;
-  /* margin-bottom: 20px; */
-  /* float: right; */
   margin-right: 0 auto;
   margin-left: auto;
   font-size: smaller;
 }
 
-/* /* .header {
+.header {
   text-align: center;
-} */
+}
 
 .btn {
   width: 120px;
   height: 50px;
-  border-radius: 10px;
   margin-bottom: 20px;
   float: right;
-  margin-right: 0 auto;
-  margin-left: auto;
+  margin-left: 5px;
 }
+ */

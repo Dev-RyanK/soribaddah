@@ -1,9 +1,31 @@
-/* 코멘트 박스 */
+/* 아이콘 */
+.icons {
+  font-size: x-large;
+  margin-bottom: 40px;
+  color: var(--color-midblue);
+}
+
+/* 리뷰란 textarea */
+.reviewText {
+  width: 100%;
+  height: 140px;
+  margin: 20px 0px 20px;
+  border: 2px solid var(--color-midblue);
+  border-radius: 0.5rem;
+}
+
+/* 코멘트 박스 그리드 */
 .commentBox {
   display: grid;
   grid-template-columns: 90% 10%;
+  grid-auto-rows: 1fr;
   align-items: center;
   width: 100%;
+  border: 8px solid white;
+  border-radius: 16px;
+  padding: 10px;
+  color: white;
+  background-color: var(--color-midblue);
 }
 
 /* 수정삭제 버튼 */
