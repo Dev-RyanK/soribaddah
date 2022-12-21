@@ -5,7 +5,7 @@ import Header from "../components/Header"
 import Home from "../pages/main/home/Home"
 import PostDetail from "../pages/PostDetail"
 import AddList from "../pages/main/Add/AddList"
-import Login from "../pages/Login"
+import Login from "../pages/Login/Login"
 import Signup from "../pages/Signup"
 import HomeCardList from "../pages/main/home/HomeCardList"
 

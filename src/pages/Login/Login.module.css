@@ -1,0 +1,36 @@
+.loginWrap {
+  display: flex;
+  justify-content: center;
+  width: 98%;
+}
+
+.loginForm {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  width: 240px;
+  padding: 10px;
+  border: 2px solid var(--color-midblue);
+  border-radius: 16px;
+  box-shadow: 6px 6px 2px 4px var(--color-midblue);
+}
+
+.userInfo {
+  width: 100%;
+  height: 2rem;
+  border: none;
+  box-shadow: 0px 0px 2px 2px #ececec;
+  margin-bottom: 8px;
+}
+
+.naverLoginBtn {
+  width: 140px;
+  margin-top: 2px;
+}
+
+.loginBtn {
+  width: 140px;
+  height: 2em;
+  margin-top: 12px;
+  border-radius: 3px;
+}
