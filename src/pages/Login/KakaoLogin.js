@@ -9,7 +9,7 @@ import {
 import { useEffect } from "react"
 import { REDIRECT_URI, REST_API_KEY } from "./kakaoApi"
 import axios from "axios"
-import { apis } from "../../shared/api"
+import { apis, DB } from "../../shared/api"
 
 const KakaoLogin = () => {
   const location = useLocation()
@@ -40,7 +40,7 @@ const KakaoLogin = () => {
     getKakaoToken()
     axios
       // .post(`http://192.168.5.7:8080/api/login/kakao?code=${KAKAO_CODE}`)
-      .get(`http://192.168.5.7:8080/api/login/kakao?code=${KAKAO_CODE}`)
+      .get(`${DB}/api/login/kakao?code=${KAKAO_CODE}`)
       .then((res) => res.json())
       .catch((err) => console.log(err))
     /* .then((data) => {
