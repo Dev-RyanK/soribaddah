@@ -58,7 +58,7 @@ export const apis = {
 api.interceptors.request.use(function (config) {
   const token = localStorage.getItem("ACCESS_TOKEN")
   const rToken = localStorage.getItem("REFRESH_TOKEN")
-  if (!token) {
+  if (token === undefined) {
     config.headers["AccessToken"] = null
     config.headers["RefreshToken"] = null
     return config
@@ -70,6 +70,7 @@ api.interceptors.request.use(function (config) {
 })
 
 //AccessToken이 만료됐을때 처리
+// 403일때?? 확정해서 if문 처리 (401은 로그아웃임)
 api.interceptors.response.use(
   function (res) {
     return res
