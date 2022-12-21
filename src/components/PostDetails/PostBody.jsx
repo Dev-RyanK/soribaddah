@@ -63,7 +63,7 @@ const PostBody = () => {
       <StDetailWrapper>
         <StTitle>
           <h3>{detailContent?.nickname}</h3>
-          {/* 긴 이름 슬라이드(작업 중)*/}
+          {/* 긴 이름 슬라이드(작업 중) props로 변수 내려주게 작업*/}
           {detailContent?.title.length > 40 ? (
             <div className={classes.animatedTitle}>
               <div className={classes.track}>
@@ -105,10 +105,10 @@ const PostBody = () => {
     return (
       // 인풋 전환, display: unset, comment 숨김상태로
       <StFormWrapper
-      /* onSubmit={(e) => {
+        onSubmit={(e) => {
           e.preventDefault()
           console.log(detailContent)
-        }} */
+        }}
       >
         {/* 제목 / 가수 */}
         <StTitle>
@@ -149,9 +149,10 @@ const PostBody = () => {
           alt="이미지를 넣어주세요"
           onChange={onChangeHandler}
         />
-        {/* 이미지 */}
+        {/* 이미지 링크 */}
         <Input
           name="image"
+          type="URL"
           className={classes.albumURL}
           defaultValue={detailContent?.image}
           onChange={onChangeHandler}
