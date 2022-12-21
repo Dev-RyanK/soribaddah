@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { __addMusic } from "../../../redux/modules/todoSlice";
+import { api } from "../../../shared/api";
 import classes from "./AddList.module.css";
 
 const AddList = () => {
@@ -21,14 +22,23 @@ const AddList = () => {
 
   const onAddHandler = async (e) => {
     e.preventDefault();
+    api.post(`/api/music`, { data });
     dispatch(__addMusic({ ...data }));
+    console.log(data);
     // if (!data_title || !data_artist || !data_contents) {
     //   return alert("빈칸을 채워 주세요");
     // }
   };
 
   return (
-    <form method="post" className={classes.box}>
+    <form
+      onSubmit={(e) => {
+        onAddHandler(e);
+        navigate("/");
+      }}
+      method="post"
+      className={classes.box}
+    >
       <h2 className={classes.head}>등록하기</h2>
       <div className={classes.title}>
         <input
@@ -69,11 +79,15 @@ const AddList = () => {
       </div>{" "}
       <br />
       <footer className={classes.btn}>
-        <button style={{ width: "100px" }} onSubmit={onAddHandler}>
+        <button type="submit" style={{ width: "100px" }}>
           등록
         </button>
         &nbsp;
-        <button style={{ width: "100px" }} onClick={() => navigate("/")}>
+        <button
+          type="button"
+          style={{ width: "100px" }}
+          onClick={() => navigate("/")}
+        >
           뒤로가기
         </button>
       </footer>
