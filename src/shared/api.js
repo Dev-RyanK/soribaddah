@@ -2,6 +2,7 @@ import axios from "axios"
 import { REST_API_KEY, REDIRECT_URI } from "../pages/Login/kakaoApi"
 
 export const DB = process.env.React_APP_DBSERVER
+export const PUBLIC_URL = process.env.PUBLIC_URL
 
 export const api = axios.create({
   baseURL: DB,
