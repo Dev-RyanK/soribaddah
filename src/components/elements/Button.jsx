@@ -12,6 +12,7 @@ const Button = (props) => {
     height,
     margin,
     padding,
+    borderRadius,
     children,
   } = props
 
@@ -20,6 +21,7 @@ const Button = (props) => {
     width: width,
     height: height,
     padding: padding,
+    borderRadius: borderRadius,
   }
 
   return (
@@ -48,6 +50,7 @@ Button.defaultProps = {
   height: "",
   margin: "",
   padding: "10px",
+  borderRadius: "",
   children: null,
 }
 
