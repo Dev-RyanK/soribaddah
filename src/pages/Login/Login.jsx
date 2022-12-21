@@ -2,11 +2,16 @@ import React, { useState, useEffect } from "react"
 import styled from "styled-components"
 import Input from "../../components/elements/Input"
 import Button from "../../components/elements/Button"
+import Auth from "./Auth"
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { __postLogin } from "../../redux/modules/loginSlice"
 import { useNavigate, Link } from "react-router-dom"
 import classes from "./Login.module.css"
+import api from "../../shared/api"
+import axios from "axios"
 // import { onSilentRefresh } from "../shared/api"
+import { REST_API_KEY, REDIRECT_URI } from "./kakaoApi"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -34,7 +39,7 @@ const Login = () => {
   }
 
   const dispatch = useDispatch()
-
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`
   useEffect(() => {
     // onSilentRefresh()
   }, [])
@@ -78,11 +83,18 @@ const Login = () => {
           alt="네이버 로그인"
           onClick={() => {
             window.open(
-              "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=LooykSb4lJ9_VSgNb08B&state=state&redirect_uri=http://localhost:8080/api/login/naver/callback",
-              "_blank"
+              "https://nid.naver.com/oauth2.0/authorize?response_type=code&client_id=LooykSb4lJ9_VSgNb08B&state=state&redirect_uri=http://129.154.54.69:8080/api/login/naver/callback"
             )
           }}
         />
+        <div
+          onClick={() => {
+            // window.location.href = KAKAO_AUTH_URL
+            window.location.assign(KAKAO_AUTH_URL)
+          }}
+        >
+          카카오 로그인
+        </div>
         <Link to="/signup">
           <span>회원가입</span>
         </Link>

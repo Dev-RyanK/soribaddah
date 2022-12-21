@@ -8,6 +8,7 @@ import AddList from "../pages/main/Add/AddList"
 import Login from "../pages/Login/Login"
 import Signup from "../pages/Signup"
 import HomeCardList from "../pages/main/home/HomeCardList"
+import KakaoLogin from "../pages/Login/KakaoLogin"
 
 const Router = () => {
   return (
@@ -22,6 +23,7 @@ const Router = () => {
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
             <Route path="music/:id" element={<PostDetail />} />
+            <Route path="/kakaoLogin" element={<KakaoLogin />} />
           </Route>
         </Routes>
       </Layout>
