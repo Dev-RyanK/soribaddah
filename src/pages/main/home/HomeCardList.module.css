@@ -31,6 +31,7 @@
 /* 앨범 이미지 */
 .albumCover {
   width: 100%;
+  border: 4px solid white;
   /* border-radius: 16px; */
 }
 
@@ -51,6 +52,7 @@
     ". . . .";
   justify-items: center;
   font-size: larger;
+  color: var(--color-deepblue);
 }
 
 /* 노래 이름, 가수명 */
@@ -65,6 +67,12 @@
   line-height: 1.4em;
   text-align: center;
 }
+
+/* .textWrap {
+  width: 100%;
+  height: fit-content;
+  background-color: white;
+} */
 
 .musicContents {
   /* 높이에 맞춰 글자 수 자르기 */

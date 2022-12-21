@@ -2,6 +2,8 @@ import React from "react"
 import classes from "./Header.module.css"
 import { Link } from "react-router-dom"
 import Button from "./elements/Button"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faWater } from "@fortawesome/free-solid-svg-icons"
 
 const Header = () => {
   return (
@@ -9,7 +11,10 @@ const Header = () => {
       {/* 그리드 중앙정렬용 빈칸 */}
       &nbsp;
       <Link to={"/"}>
-        <h1 className={classes.mainTitle}>소리받아</h1>
+        <h1 className={classes.mainTitle}>
+          <FontAwesomeIcon icon={faWater}></FontAwesomeIcon>&nbsp;소리받아&nbsp;
+          <FontAwesomeIcon icon={faWater}></FontAwesomeIcon>
+        </h1>
       </Link>
       <div>
         <Link to={"/login"}>
