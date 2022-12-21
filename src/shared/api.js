@@ -1,4 +1,5 @@
 import axios from "axios"
+import { REST_API_KEY, REDIRECT_URI } from "../pages/Login/kakaoApi"
 
 export const DB = process.env.React_APP_DBSERVER
 
@@ -52,6 +53,26 @@ export const apis = {
         alert(err.response.data.msg)
       })
   },
+
+  /* 카카오 로그인 */
+  kakao: (kakaoCode) => {
+    axios
+      .post(`https://kauth.kakao.com/oauth/token`, {
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded;charset=utf-8",
+        },
+        body: `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${kakaoCode}`,
+      })
+      .then((res) => res.json())
+      .then((data) => {
+        if (data.access_token) {
+          localStorage.setItem("token", data.access_token)
+        } else {
+          // navigate("/")
+          console.log("done")
+        }
+      })
+  },
 }
 
 /****** Interceptor ******/
@@ -76,11 +97,18 @@ api.interceptors.response.use(
     return res
   },
   function (err) {
-    const token = localStorage.getItem("ACCESS_TOKEN") // 헌 토큰
-    const rToken = localStorage.getItem("REFRESH_TOKEN")
-    err.headers["AccessToken"] = token
-    err.headers["RefreshToken"] = rToken
-    return err
+    if (
+      err.response.status === 403 ||
+      err.headers["AccessToken"] === undefined
+    ) {
+      console.log(err)
+      const token = localStorage.getItem("ACCESS_TOKEN") // 헌 토큰
+      const rToken = localStorage.getItem("REFRESH_TOKEN")
+      err.headers["AccessToken"] = token
+      err.headers["RefreshToken"] = rToken
+      return err
+    }
+    return Promise.reject(err)
   }
 )
 
