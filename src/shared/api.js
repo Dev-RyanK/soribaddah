@@ -1,7 +1,9 @@
 import axios from "axios"
 
 export const DB = process.env.React_APP_DBSERVER
-export const PUBLIC_URL = process.env.PUBLIC_URL
+export const PUBLIC_URL = process.env.REACT_APP_PUBLIC_URL
+export const REST_API_KEY = process.env.REACT_APP_REST_API_KEY
+export const REDIRECT_URI = process.env.REACT_APP_REDIRECT_URI
 
 export const api = axios.create({
   baseURL: DB,

@@ -21,18 +21,13 @@ const AddList = () => {
   };
 
   const onAddHandler = async (e) => {
-    if (data.image === "") {
-      return alert("빈칸을 채워주세요");
-    } else {
-      e.preventDefault();
-      api.post(`/api/music`, { ...data });
-      // dispatch(__addMusic({ ...data }));
-      console.log({ ...data });
-      // if (!data_title || !data_artist || !data_contents) {
-      //   return alert("빈칸을 채워 주세요");
-      // }
-    }
-  };
+    e.preventDefault()
+    api.post(`/api/music`, { ...data })
+    // dispatch(__addMusic({ ...data }))
+    // if (!data_title || !data_artist || !data_contents) {
+    //   return alert("빈칸을 채워 주세요");
+    // }
+  }
 
   return (
     <form
