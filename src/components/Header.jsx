@@ -11,7 +11,7 @@ const Header = () => {
     <header className={classes.head}>
       {/* 그리드 중앙정렬용 빈칸 */}
       &nbsp;
-      <Link to={"/"}>
+      <Link to={"/music"}>
         <h1 className={classes.mainTitle}>
           <FontAwesomeIcon icon={faWater}></FontAwesomeIcon>&nbsp;소리받아&nbsp;
           <FontAwesomeIcon icon={faWater}></FontAwesomeIcon>
@@ -19,6 +19,14 @@ const Header = () => {
       </Link>
       {localStorage.ACCESS_TOKEN ? (
         <div>
+          <Button
+            className={classes.btn}
+            onClick={() => {
+              navigate("/AddList")
+            }}
+          >
+            추천하기
+          </Button>
           <Button
             className={classes.btn}
             onClick={() => {
