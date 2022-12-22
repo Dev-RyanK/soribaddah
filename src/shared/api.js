@@ -1,5 +1,4 @@
 import axios from "axios"
-import { REST_API_KEY, REDIRECT_URI } from "../pages/Login/kakaoApi"
 
 export const DB = process.env.React_APP_DBSERVER
 export const PUBLIC_URL = process.env.PUBLIC_URL
@@ -49,12 +48,19 @@ export const apis = {
       .catch((err) => alert(err.response.data.msg))
   },
 
+  /****** 게시글 수정 ******/
+  patchPost: (postId, payload) => {
+    api
+      .patch(`/api/music/${postId}`, payload)
+      .then((res) => console.log(res))
+      .catch((err) => console.log(err))
+  },
+
   /****** 댓글 작성 ******/
   postComment: (payload) => {
     api
       .post(`/api/comment/${payload}`)
       .then((res) => {
-        console.log(res)
         alert("작성 완료!")
       })
       .catch((err) => {
@@ -126,7 +132,7 @@ api.interceptors.response.use(
     const originalReq = err.config
     if (
       // err.response.status === 403 &&
-      err.response.status === 401 &&
+      err.response.status === 403 &&
       err.config /* && */
       // !err.config.__isRetryRequest
     ) {
@@ -134,10 +140,15 @@ api.interceptors.response.use(
       // originalReq._retry = true
       // 만약 retry인 request가 401일 되면 위의 분기를 통해서 refresh하지 않는다.
       try {
-        const res = await axios.post(`${DB}/api/login`, {
-          RefreshToken: localStorage.getItem("refresh_token"),
+        console.log("post")
+
+        const res = await axios.post(`${DB}/api/music`, {
+          AccessToken: localStorage.getItem("ACCESS_TOKEN"),
+          RefreshToken: localStorage.getItem("REFRESH_TOKEN"),
         })
         const data = res.data
+
+        console.log(data)
 
         localStorage.setItem("ACCESS_TOKEN", data.data.AccessToken)
         localStorage.setItem("REFRESH_TOKEN", data.data.RefreshToken)
@@ -146,9 +157,11 @@ api.interceptors.response.use(
 
         return axios(originalReq)
       } catch (error) {
+        console.log("get")
+
         // refresh 토큰도 만료되었거나 오류 발생 시
         // window.location.href = "/"
-        console.log(error)
+        // console.log(error)
 
         return Promise.reject(err)
       }
