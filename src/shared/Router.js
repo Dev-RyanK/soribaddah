@@ -1,13 +1,13 @@
-import React from "react"
-import { BrowserRouter, Route, Routes } from "react-router-dom"
-import Layout from "../components/Layout"
-import Header from "../components/Header"
-import Home from "../pages/main/home/Home"
-import PostDetail from "../pages/PostDetail"
-import AddList from "../pages/main/Add/AddList"
-import Login from "../pages/Login/Login"
-import Signup from "../pages/Signup"
-import HomeCardList from "../pages/main/home/HomeCardList"
+import React from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import Layout from "../components/Layout";
+import Header from "../components/Header";
+import Home from "../pages/main/home/Home";
+import PostDetail from "../pages/PostDetail";
+import AddList from "../pages/main/Add/AddList";
+import Login from "../pages/Login/Login";
+import Signup from "../pages/Signup";
+import HomeCardList from "../pages/main/home/HomeCardList";
 
 const Router = () => {
   return (
@@ -16,7 +16,7 @@ const Router = () => {
         <Header />
         <Routes>
           <Route>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomeCardList />} />
             <Route path="/music" element={<HomeCardList />} />
             <Route path="/AddList" element={<AddList />} />
             <Route path="signup" element={<Signup />} />
@@ -26,7 +26,7 @@ const Router = () => {
         </Routes>
       </Layout>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;
