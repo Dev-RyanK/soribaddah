@@ -54,8 +54,12 @@ export const apis = {
   patchPost: (postId, payload) => {
     api
       .patch(`/api/music/${postId}`, payload)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err))
+      .then((res) => {
+        alert(res.data.msg)
+      })
+      .catch((err) => {
+        alert(err.response.data.msg)
+      })
   },
 
   /****** 댓글 작성 ******/
