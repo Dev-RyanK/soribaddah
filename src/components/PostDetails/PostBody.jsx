@@ -15,7 +15,6 @@ import Textarea from "../elements/Textarea"
 import { __getMusic } from "../../redux/modules/todoSlice"
 import { __getPost } from "../../redux/modules/postDetailSlice"
 // import PostComment from "./PostComment";
-// import default_Img from "./Img"
 
 const PostBody = () => {
   const aToken = localStorage.getItem("ACCESS_TOKEN")
@@ -73,9 +72,9 @@ const PostBody = () => {
       // dispatch(__getPost(paramId))
     }, [dispatch])
 
-    /* const onErrorImg = (e) => {
-      e.target.src = default_Img
-    } */
+    const onErrorImg = (e) => {
+      e.target.src = "img/default_img.webp"
+    }
 
     if (isLoading) return <div>Loading...</div>
 
