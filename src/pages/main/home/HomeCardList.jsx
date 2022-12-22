@@ -11,7 +11,7 @@ import {
   faForward,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
-import default_Img from "./img/default_Img.jpeg.png";
+import default_Img from "./img/default_img.jpeg.png";
 
 const HomeCardList = () => {
   const navigate = useNavigate();
@@ -53,6 +53,7 @@ const HomeCardList = () => {
                 src={music.image}
                 alt={`제목: ${music.title} / 가수: ${music.artist}`}
                 onError={onErrorImg}
+                style={{ width: "192px", height: "192px" }}
               />
               <span key={"span" + music.musicId} className={classes.icons}>
                 <FontAwesomeIcon
