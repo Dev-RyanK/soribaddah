@@ -28,7 +28,6 @@ const PostBody = () => {
     musicIsMine: "false",
     commentList: [],
   })
-  // const [toggleInput, setToggleInput] = useState(false)
   const { toggle } = useSelector((state) => state.toggle)
   const param = useParams()
   const paramId = parseInt(param.id)
@@ -70,7 +69,16 @@ const PostBody = () => {
   // 상세페이지 보기 모드
   if (toggle === "unset")
     return (
-      <StDetailWrapper>
+      <StDetailWrapper
+        onSubmit={(e) => {
+          e.preventDefault()
+          if (window.confirm("정말 삭제하시겠습니까?")) {
+            onDeleteHandler()
+          } else {
+            return
+          }
+        }}
+      >
         <StTitle>
           <h3>{detailContent?.nickname}</h3>
           {/* 긴 이름 슬라이드(작업 중) props로 변수 내려주게 작업*/}
@@ -92,18 +100,17 @@ const PostBody = () => {
         </StTitle>
         {detailContent?.musicIsMine ? (
           <ElBtnBox>
+            {/* 수정버튼 */}
             <Button
               type="button"
               onClick={() => {
-                // setToggleInput(!toggleInput)
                 dispatch(goToggle("none"))
               }}
             >
               수정
             </Button>
-            <Button type="submit" onClick={onDeleteHandler}>
-              삭제
-            </Button>
+            {/* 삭제버튼 */}
+            <Button type="submit">삭제</Button>
           </ElBtnBox>
         ) : (
           <></>
@@ -118,7 +125,7 @@ const PostBody = () => {
       </StDetailWrapper>
     )
 
-  // 수정모드 전환
+  /****** 수정모드 전환 *******/
   if (toggle === "none")
     return (
       // 인풋 전환, display: unset, comment 숨김상태로
@@ -187,7 +194,7 @@ const PostBody = () => {
 
 export default PostBody
 
-const StDetailWrapper = styled.div`
+const StDetailWrapper = styled.form`
   display: grid;
   grid-template-columns: 10% 1fr 10%;
   grid-auto-rows: repeat(4, 1fr);
@@ -197,6 +204,7 @@ const StDetailWrapper = styled.div`
     ". review ."
     "comments comments comments";
   row-gap: 20px;
+  width: 100%;
 `
 
 const StFormWrapper = styled.form`
@@ -237,5 +245,6 @@ const ElBtnBox = styled.div`
 
 const ElCover = styled.img`
   width: 100%;
+  border: 1px solid var(--color-lightblue);
   grid-area: albumCover;
 `
