@@ -41,6 +41,13 @@ export const apis = {
       })
       .catch((err) => alert(err.response.data.msg))
   },
+  /****** 게시글 삭제 ******/
+  delPost: (postId) => {
+    api
+      .delete(`/api/music/${postId}`, postId)
+      .then((res) => alert(res.data.msg))
+      .catch((err) => alert(err.response.data.msg))
+  },
 
   /****** 댓글 작성 ******/
   postComment: (payload) => {
@@ -119,12 +126,12 @@ api.interceptors.response.use(
     const originalReq = err.config
     if (
       // err.response.status === 403 &&
-      err.response.status >= 400 /* &&
-      err.config */ /* && */
+      err.response.status === 401 &&
+      err.config /* && */
       // !err.config.__isRetryRequest
     ) {
       // 401 이고, err.config가 있고, retry reqeust가 아니면 토큰 만료라고 판단하여 refresh 요청
-      originalReq._retry = true
+      // originalReq._retry = true
       // 만약 retry인 request가 401일 되면 위의 분기를 통해서 refresh하지 않는다.
       try {
         const res = await axios.post(`${DB}/api/login`, {
