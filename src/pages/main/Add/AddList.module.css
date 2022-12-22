@@ -19,11 +19,19 @@
   color: #37419a;
 }
 
-.title {
+.qwe > textarea {
+  border: none;
+  resize: none;
+  margin-bottom: 10px;
+  border: 1px solid #a9dfed;
+  border-radius: 10px;
+}
+
+.qwe {
   display: flex;
   justify-content: space-between;
 }
-.title > input {
+.qwe > input {
   border: 1px solid #a9dfed;
   border-radius: 10px;
 }

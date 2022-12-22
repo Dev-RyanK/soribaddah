@@ -1,18 +1,18 @@
-import React, { useEffect } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import classes from "../home/Home.module.css"
-import { __getMusic } from "../../../redux/modules/todoSlice"
-import HomeCardList from "./HomeCardList"
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import classes from "../home/Home.module.css";
+import { __getMusic } from "../../../redux/modules/todoSlice";
+import HomeCardList from "./HomeCardList";
 
 const Home = () => {
-  const navigate = useNavigate()
-  const musics = useSelector((state) => state.data)
-  const dispatch = useDispatch()
+  const navigate = useNavigate();
+  const musics = useSelector((state) => state.data);
+  const dispatch = useDispatch();
 
   useEffect(() => {
     // dispatch(__getMusic());
-  }, [dispatch])
+  }, [dispatch]);
 
   return (
     <>
@@ -49,7 +49,7 @@ const Home = () => {
       })}
   </div> */}
     </>
-  )
-}
+  );
+};
 
-export default Home
+export default Home;

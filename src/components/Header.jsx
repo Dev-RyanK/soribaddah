@@ -1,12 +1,12 @@
-import React from "react"
-import classes from "./Header.module.css"
-import { Link, useNavigate } from "react-router-dom"
-import Button from "./elements/Button"
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
-import { faWater } from "@fortawesome/free-solid-svg-icons"
+import React from "react";
+import classes from "./Header.module.css";
+import { Link, useNavigate } from "react-router-dom";
+import Button from "./elements/Button";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faWater } from "@fortawesome/free-solid-svg-icons";
 
 const Header = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <header className={classes.head}>
       {/* 그리드 중앙정렬용 빈칸 */}
@@ -22,7 +22,7 @@ const Header = () => {
           <Button
             className={classes.btn}
             onClick={() => {
-              navigate("/AddList")
+              navigate("/AddList");
             }}
           >
             추천하기
@@ -30,10 +30,10 @@ const Header = () => {
           <Button
             className={classes.btn}
             onClick={() => {
-              localStorage.removeItem("ACCESS_TOKEN")
-              localStorage.removeItem("REFRESH_TOKEN")
-              alert("로그아웃 되었습니다.")
-              navigate("/music")
+              localStorage.removeItem("ACCESS_TOKEN");
+              localStorage.removeItem("REFRESH_TOKEN");
+              alert("로그아웃 되었습니다.");
+              navigate("/music");
             }}
           >
             로그아웃
@@ -52,7 +52,7 @@ const Header = () => {
         </Link>
       </div> */}
     </header>
-  )
-}
+  );
+};
 
-export default Header
+export default Header;
