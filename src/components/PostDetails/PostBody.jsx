@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react"
-import { useDispatch, useSelector } from "react-redux"
-import { useParams, useNavigate } from "react-router-dom"
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams, useNavigate } from "react-router-dom";
 
-import styled from "styled-components"
-import classes from "../PostDetails/PostBody.module.css"
+import styled from "styled-components";
+import classes from "../PostDetails/PostBody.module.css";
 
-import { goToggle } from "../../redux/modules/togglePageSlice"
-import { api, apis } from "../../shared/api"
+import { goToggle } from "../../redux/modules/togglePageSlice";
+import { api, apis } from "../../shared/api";
 
-import PostComment from "./PostComment"
-import Button from "../elements/Button"
-import Input from "../elements/Input"
-import Textarea from "../elements/Textarea"
+import PostComment from "./PostComment";
+import Button from "../elements/Button";
+import Input from "../elements/Input";
+import Textarea from "../elements/Textarea";
+import default_Img from "./Img/default_img.jpeg.png";
 
 const PostBody = () => {
-  const { post, isLoading, error } = useSelector((state) => state.post)
+  const { post, isLoading, error } = useSelector((state) => state.post);
 
   const [detailContent, setDetailContent] = useState({
     musicId: 0,
@@ -27,44 +28,49 @@ const PostBody = () => {
     modifiedAt: "",
     musicIsMine: "false",
     commentList: [],
-  })
-  const { toggle } = useSelector((state) => state.toggle)
-  const param = useParams()
-  const paramId = parseInt(param.id)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  });
+  // const [toggleInput, setToggleInput] = useState(false)
+  const { toggle } = useSelector((state) => state.toggle);
+  const param = useParams();
+  const paramId = parseInt(param.id);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const fetchDetailContent = async () => {
     try {
       // 이거 thunk 처리? 해야할 것 같음
-      const musicData = await api.get(`/api/music/${paramId}`)
-      setDetailContent(musicData.data.data)
+      const musicData = await api.get(`/api/music/${paramId}`);
+      setDetailContent(musicData.data.data);
     } catch (error) {
       // console.log(error)
     }
-  }
+  };
   const onChangeHandler = (e) => {
-    const { name, value } = e.target
-    setDetailContent({ ...detailContent, [name]: value })
-  }
+    const { name, value } = e.target;
+    setDetailContent({ ...detailContent, [name]: value });
+  };
 
   const onDeleteHandler = () => {
-    apis.delPost(paramId)
-    navigate("/music")
-  }
+    apis.delPost(paramId);
+    navigate("/music");
+  };
 
   const onPatchHander = (payload) => {
-    apis.patchPost(paramId, payload)
-    fetchDetailContent()
-    console.log("done")
-  }
+    apis.patchPost(paramId, payload);
+    fetchDetailContent();
+    console.log("done");
+  };
 
   useEffect(() => {
-    fetchDetailContent()
-  }, [dispatch])
+    fetchDetailContent();
+  }, [dispatch]);
 
-  if (isLoading) return <div>Loading...</div>
+  const onErrorImg = (e) => {
+    e.target.src = default_Img;
+  };
 
-  if (error) return <div>{error.msg}</div>
+  if (isLoading) return <div>Loading...</div>;
+
+  if (error) return <div>{error.msg}</div>;
 
   // 상세페이지 보기 모드
   if (toggle === "unset")
@@ -104,7 +110,8 @@ const PostBody = () => {
             <Button
               type="button"
               onClick={() => {
-                dispatch(goToggle("none"))
+                // setToggleInput(!toggleInput)
+                dispatch(goToggle("none"));
               }}
             >
               수정
@@ -117,13 +124,15 @@ const PostBody = () => {
         )}
         <ElCover
           src={detailContent?.image}
+          onError={onErrorImg}
+          style={{ width: "409px", height: "490px" }}
           alt={`${detailContent?.artist}의 ${detailContent?.title} 앨범 커버`}
         />
         <p style={{ gridArea: "review" }}>{detailContent?.contents}</p>
         {/* 댓글란 */}
         {/* <PostComment /> */}
       </StDetailWrapper>
-    )
+    );
 
   /****** 수정모드 전환 *******/
   if (toggle === "none")
@@ -131,9 +140,9 @@ const PostBody = () => {
       // 인풋 전환, display: unset, comment 숨김상태로
       <StFormWrapper
         onSubmit={(e) => {
-          onPatchHander(detailContent)
-          e.preventDefault()
-          dispatch(goToggle("unset"))
+          onPatchHander(detailContent);
+          e.preventDefault();
+          dispatch(goToggle("unset"));
         }}
       >
         {/* 제목 / 가수 */}
@@ -154,7 +163,7 @@ const PostBody = () => {
           <Button
             type="submit"
             onClick={() => {
-              setDetailContent({ detailContent })
+              setDetailContent({ detailContent });
             }}
           >
             확인
@@ -189,10 +198,10 @@ const PostBody = () => {
           onChange={onChangeHandler}
         />
       </StFormWrapper>
-    )
-}
+    );
+};
 
-export default PostBody
+export default PostBody;
 
 const StDetailWrapper = styled.form`
   display: grid;
@@ -204,8 +213,7 @@ const StDetailWrapper = styled.form`
     ". review ."
     "comments comments comments";
   row-gap: 20px;
-  width: 100%;
-`
+`;
 
 const StFormWrapper = styled.form`
   display: grid;
@@ -220,7 +228,7 @@ const StFormWrapper = styled.form`
     ". review ."
     ". comments .";
   row-gap: 20px;
-`
+`;
 
 const StTitle = styled.div`
   display: grid;
@@ -233,7 +241,7 @@ const StTitle = styled.div`
   width: 100%;
   text-align: center;
   grid-area: title;
-`
+`;
 
 const ElBtnBox = styled.div`
   display: grid;
@@ -241,10 +249,10 @@ const ElBtnBox = styled.div`
   /* margin-right: 0 auto; */
   margin-left: auto;
   grid-area: btnBox;
-`
+`;
 
 const ElCover = styled.img`
   width: 100%;
   border: 1px solid var(--color-lightblue);
   grid-area: albumCover;
-`
+`;
