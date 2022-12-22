@@ -11,6 +11,7 @@ import {
   faForward,
 } from "@fortawesome/free-solid-svg-icons";
 import { Link, useNavigate } from "react-router-dom";
+import default_Img from "./img/default_Img.jpeg.png";
 
 const HomeCardList = () => {
   const navigate = useNavigate();
@@ -26,6 +27,10 @@ const HomeCardList = () => {
     dispatch(__getMusic());
     fetchMusicList();
   }, []);
+
+  const onErrorImg = (e) => {
+    e.target.src = default_Img;
+  };
 
   if (isLoading) {
     return <div>로딩중...</div>;
@@ -56,6 +61,7 @@ const HomeCardList = () => {
                 className={classes.albumCover}
                 src={music.image}
                 alt={`제목: ${music.title} / 가수: ${music.artist}`}
+                onError={onErrorImg}
               />
               <span key={"span" + music.musicId} className={classes.icons}>
                 <FontAwesomeIcon
