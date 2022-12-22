@@ -1,24 +1,24 @@
-import React, { useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
-import classes from "../home/Home.module.css";
-import { __getMusic } from "../../../redux/modules/todoSlice";
+import React, { useEffect } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { useNavigate } from "react-router-dom"
+import classes from "../home/Home.module.css"
+import { __getMusic } from "../../../redux/modules/todoSlice"
 
 const Home = () => {
-  const navigate = useNavigate();
-  const musics = useSelector((state) => state.data);
-  const dispatch = useDispatch();
+  const navigate = useNavigate()
+  const musics = useSelector((state) => state.data)
+  const dispatch = useDispatch()
 
   useEffect(() => {
     // dispatch(__getMusic());
-  }, [dispatch]);
+  }, [dispatch])
 
   return (
     <div>
       <div className={classes.header}>
         <button
           onClick={() => {
-            navigate("/AddList");
+            navigate("/AddList")
           }}
         >
           추천하기
@@ -30,7 +30,7 @@ const Home = () => {
             <div
               key={music.musicId}
               onClick={() => {
-                navigate(`/music/${music.musicId}`);
+                navigate(`/music/${music.musicId}`)
               }}
             >
               {music.artist}-{music.title}
@@ -43,10 +43,10 @@ const Home = () => {
               />
               <div>{music.contents}</div>
             </div>
-          );
+          )
         })}
     </div>
-  );
-};
+  )
+}
 
-export default Home;
+export default Home
