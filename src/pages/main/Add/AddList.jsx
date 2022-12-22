@@ -1,59 +1,65 @@
-import React, { useState } from "react"
-import { useDispatch } from "react-redux"
-import { useNavigate } from "react-router-dom"
-import { __addMusic } from "../../../redux/modules/todoSlice"
-import { api } from "../../../shared/api"
-import classes from "./AddList.module.css"
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { __addMusic } from "../../../redux/modules/todoSlice";
+import { api } from "../../../shared/api";
+import classes from "./AddList.module.css";
 
 const AddList = () => {
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const [data, setData] = useState({
     title: "",
     artist: "",
     image: "",
     contents: "",
-  })
+  });
 
   const changeInput = (e) => {
-    const { name, value } = e.target
-    setData({ ...data, [name]: value })
-  }
+    const { name, value } = e.target;
+    setData({ ...data, [name]: value });
+  };
 
   const onAddHandler = async (e) => {
-    e.preventDefault()
-    api.post(`/api/music`, { ...data })
-    // dispatch(__addMusic({ ...data }))
-    console.log({ ...data })
-    // if (!data_title || !data_artist || !data_contents) {
-    //   return alert("빈칸을 채워 주세요");
-    // }
-  }
+    if (data.image === "") {
+      return alert("빈칸을 채워주세요");
+    } else {
+      e.preventDefault();
+      api.post(`/api/music`, { ...data });
+      // dispatch(__addMusic({ ...data }));
+      console.log({ ...data });
+      // if (!data_title || !data_artist || !data_contents) {
+      //   return alert("빈칸을 채워 주세요");
+      // }
+    }
+  };
 
   return (
     <form
       onSubmit={(e) => {
-        onAddHandler(e)
-        navigate("/")
+        onAddHandler(e);
+        navigate("/music");
       }}
       method="post"
       className={classes.box}
     >
       <h2 className={classes.head}>등록하기</h2>
-      <div className={classes.title}>
-        <input
+      <div className={classes.qwe}>
+        <textarea
+          style={{ width: "200px" }}
           type="text"
           name="artist"
           // value={data.artist}
-          maxLength="20"
+          maxLength="24"
           placeholder="가수이름을 입력하세요"
           onChange={changeInput}
         />
-        <input
+        <textarea
+          style={{ width: "200px" }}
           type="text"
           name="title"
           // value={data.title}
-          maxLength="20"
+          maxLength="24"
           placeholder="제목을 입력해주세요"
           onChange={changeInput}
         />
@@ -65,6 +71,7 @@ const AddList = () => {
       <input
         style={{ width: "500px", height: "30px" }}
         type="URL"
+        value={data.image}
         name="image"
         placeholder="이미지 URL"
         onChange={changeInput}
@@ -90,13 +97,13 @@ const AddList = () => {
         <button
           type="button"
           style={{ width: "100px" }}
-          onClick={() => navigate("/")}
+          onClick={() => navigate("/music")}
         >
           뒤로가기
         </button>
       </footer>
     </form>
-  )
-}
+  );
+};
 
-export default AddList
+export default AddList;
