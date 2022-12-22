@@ -24,7 +24,6 @@ const AddList = () => {
     e.preventDefault()
     api.post(`/api/music`, { ...data })
     // dispatch(__addMusic({ ...data }))
-    console.log({ ...data })
     // if (!data_title || !data_artist || !data_contents) {
     //   return alert("빈칸을 채워 주세요");
     // }
