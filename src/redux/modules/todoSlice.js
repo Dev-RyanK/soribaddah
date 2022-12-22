@@ -15,7 +15,8 @@ export const __getMusic = createAsyncThunk(
       const musicData = await api.get(`/api/music`)
       return thunkAPI.fulfillWithValue(musicData.data.data)
     } catch (error) {
-      return thunkAPI.rejectWithValue(error)
+      // 잠시 삭제
+      // return thunkAPI.rejectWithValue(error)
     }
   }
 )

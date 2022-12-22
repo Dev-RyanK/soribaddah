@@ -31,8 +31,20 @@
   border: 1px solid #a9dfed;
   border-radius: 10px;
 }
+
 .image {
   text-align: center;
+}
+
+.previewImg {
+  display: flex;
+  /* height: 100%; */
+  align-items: center;
+  justify-content: center;
+}
+
+.previewImg img {
+  height: 100%;
 }
 
 .comment > textarea {

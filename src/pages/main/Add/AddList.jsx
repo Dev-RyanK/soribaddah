@@ -58,6 +58,10 @@ const AddList = () => {
           onChange={changeInput}
         />
       </div>
+      {/* 미리보기 이미지 */}
+      <div className={classes.previewImg}>
+        <img src={data.image} alt={`${data.title}의 ${data.artist}`}></img>
+      </div>
       <input
         style={{ width: "500px", height: "30px" }}
         type="URL"

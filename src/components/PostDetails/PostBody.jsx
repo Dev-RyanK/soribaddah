@@ -53,6 +53,12 @@ const PostBody = () => {
     navigate("/music")
   }
 
+  const onPatchHander = (payload) => {
+    apis.patchPost(paramId, payload)
+    fetchDetailContent()
+    console.log("done")
+  }
+
   useEffect(() => {
     fetchDetailContent()
   }, [dispatch])
@@ -68,7 +74,7 @@ const PostBody = () => {
         <StTitle>
           <h3>{detailContent?.nickname}</h3>
           {/* 긴 이름 슬라이드(작업 중) props로 변수 내려주게 작업*/}
-          {detailContent?.title.length > 40 ? (
+          {/* {detailContent?.title.length > 40 ? (
             <div className={classes.animatedTitle}>
               <div className={classes.track}>
                 <h2 className={classes.slideText}>
@@ -78,10 +84,10 @@ const PostBody = () => {
                 </h2>
               </div>
             </div>
-          ) : (
-            // 특정 글자수 이하일 때
-            <h2>{detailContent?.title}</h2>
-          )}
+          ) : ( */}
+          {/* 특정 글자수 이하일 때 */}
+          <h2>{detailContent?.title}</h2>
+          {/* )} */}
           <h3>{detailContent?.artist}</h3>
         </StTitle>
         {detailContent?.musicIsMine ? (
@@ -112,14 +118,15 @@ const PostBody = () => {
       </StDetailWrapper>
     )
 
-  // 수정모드 전환 시
+  // 수정모드 전환
   if (toggle === "none")
     return (
       // 인풋 전환, display: unset, comment 숨김상태로
       <StFormWrapper
         onSubmit={(e) => {
+          onPatchHander(detailContent)
           e.preventDefault()
-          console.log(detailContent)
+          dispatch(goToggle("unset"))
         }}
       >
         {/* 제목 / 가수 */}
@@ -139,10 +146,8 @@ const PostBody = () => {
         <ElBtnBox>
           <Button
             type="submit"
-            onClick={(e) => {
-              dispatch(goToggle("unset"))
-              // setDetailContent({ detailContent })
-              console.log(detailContent)
+            onClick={() => {
+              setDetailContent({ detailContent })
             }}
           >
             확인
