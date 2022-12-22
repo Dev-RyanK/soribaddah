@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react"
 import Input from "../../components/elements/Input"
 import Button from "../../components/elements/Button"
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom"
 import { useDispatch, useSelector } from "react-redux"
 import { __postLogin } from "../../redux/modules/loginSlice"
 import { useNavigate, Link } from "react-router-dom"
 import classes from "./Login.module.css"
 // import { onSilentRefresh } from "../shared/api"
+import { PUBLIC_URL, REDIRECT_URI, REST_API_KEY } from "../../shared/api"
 
 const Login = () => {
   const navigate = useNavigate()
@@ -32,8 +32,6 @@ const Login = () => {
       // navigate("/")
     }
   }
-  const REST_API_KEY = process.env.REST_API_KEY
-  const REDIRECT_URI = process.env.REDIRECT_URI
   const dispatch = useDispatch()
   const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}`
   useEffect(() => {

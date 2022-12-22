@@ -9,13 +9,14 @@ import {
 import { useEffect } from "react"
 import axios from "axios"
 import { apis, DB } from "../../shared/api"
+import { REDIRECT_URI, REST_API_KEY } from "../../shared/api"
 
 const KakaoLogin = () => {
   const location = useLocation()
   const navigate = useNavigate()
   const KAKAO_CODE = location.search.split("=")[1]
 
-  /*   const getKakaoToken = () => {
+  const getKakaoToken = () => {
     fetch(`https://kauth.kakao.com/oauth/token`, {
       method: "POST",
       headers: {
@@ -31,7 +32,7 @@ const KakaoLogin = () => {
           navigate("/")
         }
       })
-  } */
+  }
   useEffect(() => {
     if (!location.search) return
     // apis.kakao(KAKAO_CODE)
@@ -41,6 +42,7 @@ const KakaoLogin = () => {
       // .post(`http://192.168.5.7:8080/api/login/kakao?code=${KAKAO_CODE}`)
       .get(`${DB}/api/login/kakao?code=${KAKAO_CODE}`)
       .then((res) => res.json())
+      // .then((res) => console.log(res))
       .catch((err) => console.log(err))
     /* .then((data) => {
         localStorage.setItem("kakaoToken", data.token)
