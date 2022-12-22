@@ -1,42 +1,41 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { __getMusic } from "../../../redux/modules/todoSlice";
-import { api, apis } from "../../../shared/api";
-import classes from "../home/HomeCardList.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { __getMusic } from "../../../redux/modules/todoSlice"
+import { api, apis } from "../../../shared/api"
+import classes from "../home/HomeCardList.module.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faBackward,
   faPlay,
   faPause,
   faForward,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
-import default_Img from "./img/default_img.jpeg.png";
+} from "@fortawesome/free-solid-svg-icons"
+import { Link, useNavigate } from "react-router-dom"
 
 const HomeCardList = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { isLoading, error, music } = useSelector((state) => state.music);
-  const [musicList, setMusicList] = useState([]);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { isLoading, error, music } = useSelector((state) => state.music)
+  const [musicList, setMusicList] = useState([])
   const fetchMusicList = async () => {
-    const musicData = await api.get("/api/music");
-    setMusicList([...musicData.data.data]);
-  };
+    const musicData = await api.get("/api/music")
+    setMusicList([...musicData.data.data])
+  }
 
   useEffect(() => {
-    dispatch(__getMusic());
-    fetchMusicList();
-  }, []);
+    dispatch(__getMusic())
+    fetchMusicList()
+  }, [])
 
   const onErrorImg = (e) => {
-    e.target.src = default_Img;
-  };
+    e.target.src = "img/default_img.webp"
+  }
 
   if (isLoading) {
-    return <div>로딩중...</div>;
+    return <div>로딩중...</div>
   }
   if (error) {
-    return <div>{error.message}</div>;
+    return <div>{error.message}</div>
   }
   return (
     <>
@@ -52,7 +51,7 @@ const HomeCardList = () => {
                 className={classes.albumCover}
                 src={music.image}
                 alt={`제목: ${music.title} / 가수: ${music.artist}`}
-                onError={onErrorImg}
+                onError={"img/default_img.webp"}
                 style={{ width: "192px", height: "192px" }}
               />
               <span key={"span" + music.musicId} className={classes.icons}>
@@ -92,7 +91,7 @@ const HomeCardList = () => {
         ))}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default HomeCardList;
+export default HomeCardList
