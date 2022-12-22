@@ -1,54 +1,44 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { __getMusic } from "../../../redux/modules/todoSlice";
-import { api, apis } from "../../../shared/api";
-import classes from "../home/HomeCardList.module.css";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, { useEffect, useState } from "react"
+import { useDispatch, useSelector } from "react-redux"
+import { __getMusic } from "../../../redux/modules/todoSlice"
+import { api, apis } from "../../../shared/api"
+import classes from "../home/HomeCardList.module.css"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import {
   faBackward,
   faPlay,
   faPause,
   faForward,
-} from "@fortawesome/free-solid-svg-icons";
-import { Link, useNavigate } from "react-router-dom";
-import default_Img from "./img/default_Img.jpeg.png";
+} from "@fortawesome/free-solid-svg-icons"
+import { Link, useNavigate } from "react-router-dom"
 
 const HomeCardList = () => {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
-  const { isLoading, error, music } = useSelector((state) => state.music);
-  const [musicList, setMusicList] = useState([]);
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+  const { isLoading, error, music } = useSelector((state) => state.music)
+  const [musicList, setMusicList] = useState([])
   const fetchMusicList = async () => {
-    const musicData = await api.get("/api/music");
-    setMusicList([...musicData.data.data]);
-  };
+    const musicData = await api.get("/api/music")
+    setMusicList([...musicData.data.data])
+  }
 
   useEffect(() => {
-    dispatch(__getMusic());
-    fetchMusicList();
-  }, []);
+    dispatch(__getMusic())
+    fetchMusicList()
+  }, [])
 
   const onErrorImg = (e) => {
     e.target.src = default_Img;
   };
 
   if (isLoading) {
-    return <div>로딩중...</div>;
+    return <div>로딩중...</div>
   }
   if (error) {
-    return <div>{error.message}</div>;
+    return <div>{error.message}</div>
   }
   return (
     <>
-      <div className={classes.header}>
-        <button
-          onClick={() => {
-            navigate("/AddList");
-          }}
-        >
-          추천하기
-        </button>
-      </div>
       {/* 서버에서 Slice를 통해 바로 들어오는 값 */}
       {/* {music?.map((music) => ( */}
       {/* 서버에서 들어온 걸 일단 저장해두고 뿌리는 로컬 값 */}
@@ -100,7 +90,7 @@ const HomeCardList = () => {
         ))}
       </div>
     </>
-  );
-};
+  )
+}
 
-export default HomeCardList;
+export default HomeCardList
