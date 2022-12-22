@@ -17,7 +17,7 @@ const Router = () => {
         <Header />
         <Routes>
           <Route>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<HomeCardList />} />
             <Route path="/music" element={<HomeCardList />} />
             <Route path="/AddList" element={<AddList />} />
             <Route path="signup" element={<Signup />} />
@@ -28,7 +28,7 @@ const Router = () => {
         </Routes>
       </Layout>
     </BrowserRouter>
-  )
-}
+  );
+};
 
-export default Router
+export default Router;
